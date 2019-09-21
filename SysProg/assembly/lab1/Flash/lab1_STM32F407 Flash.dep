@@ -1,0 +1,4 @@
+Dependencies for Project 'lab1', Target 'STM32F407 Flash': (DO NOT MODIFY !)
+F (.\main.s)(0x5D864A23)()
+F (RTE\Device\STM32F407VG\startup_stm32f407xx.s)(0x5D863BA9)()
+F (RTE\Device\STM32F407VG\system_stm32f4xx.c)(0x5D863BA9)()
