@@ -1,0 +1,8 @@
+--cpu=Cortex-M4.fp
+".\flash\main.o"
+".\flash\startup_stm32f407xx.o"
+".\flash\system_stm32f4xx.o"
+--strict --scatter ".\Flash\lab2.sct"
+--entry=Reset_Handler --summary_stderr --info summarysizes --map --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\Flash\lab2.map" -o .\Flash\lab2.axf

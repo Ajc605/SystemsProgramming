@@ -1,0 +1,60 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000                 AREA             mainarea,CODE
+    2 00000000                 EXPORT           __main
+    3 00000000         
+    4 00000000         __main
+    5 00000000 F04F 0000       MOV              r0, #0      ; Load 0 to r0
+    6 00000004 F04F 0100       MOV              r1, #0      ; Load 0 to r1
+    7 00000008         loop
+    8 00000008 F100 0001       ADD              r0, #1      ; Add 1 to ro
+    9 0000000C 4401            ADD              r1, r0      ; Add ro to r1
+   10 0000000E 280A            CMP              r0, #10     ; Check if r0 is 10
+                                                             
+   11 00000010 DBFA            BLT              loop
+   12 00000012         
+   13 00000012 E7FE            B                .           ; Loop forever
+   14 00000014         
+   15 00000014                 END
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
+erwork --depend=.\flash\main.d -o.\flash\main.o -I.\RTE\_STM32F407_Flash -IC:\K
+EIL_V5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include -IC:\KEIL_V5\ARM\PACK\Keil\STM32F
+4xx_DFP\2.11.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include --predefine="__EVAL SE
+TA 1" --predefine="__UVISION_VERSION SETA 523" --predefine="_RTE_ SETA 1" --pre
+define="STM32F407xx SETA 1" --list=.\flash\main.lst main.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+__main 00000000
+
+Symbol: __main
+   Definitions
+      At line 4 in file main.s
+   Uses
+      At line 2 in file main.s
+Comment: __main used once
+loop 00000008
+
+Symbol: loop
+   Definitions
+      At line 7 in file main.s
+   Uses
+      At line 11 in file main.s
+Comment: loop used once
+mainarea 00000000
+
+Symbol: mainarea
+   Definitions
+      At line 1 in file main.s
+   Uses
+      None
+Comment: mainarea unused
+3 symbols
+338 symbols in table
