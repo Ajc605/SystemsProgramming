@@ -11,5 +11,11 @@ int main(void) {
 	int *stack_p = stack;
 
 	/* Finish this! */
-	
+	push(&stack_p, 5);
+	push(&stack_p, 15);
+	push(&stack_p, 10);
+	printf("Popped value: %d\r\n", pop(&stack_p));
+	printf("Popped value: %d\r\n", pop(&stack_p));
+	printf("Popped value: %d\r\n", pop(&stack_p));
+	printf("Popped value: %d\r\n", pop(&stack_p));
 }
