@@ -7,9 +7,15 @@ int retrieve = 0;
 
 int put(int item) {
 	int done = 1;
-	queue[insert] = item;
-	insert = (insert + 1) % 10;
-	//printf("insert: %d\r\n",insert);
+	if((insert == 9 && retrieve == 0)||(insert == retrieve -1)) {
+		printf("full\r\n");
+		done = 0;
+	} else {
+		printf("not full\r\n");
+		queue[insert] = item;
+		insert = (insert + 1) % 10;
+		//printf("insert: %d\r\n",insert);
+	}
 	return done;
 }
 
@@ -31,17 +37,8 @@ int main(void) {
 	serial_init();
 	int value;
 	printf("\r\n\r\nNothing is pushed: %d\r\n", get(&value));
-	put(7);
-	put(5);
+	put(0);
 	printf("Success or fail: %d, pushed value: %d\r\n", get(&value), value);
-	printf("retrieve: %d, insert: %d\r\n",retrieve,insert);
-	printf("Success or fail: %d, pushed value: %d\r\n", get(&value), value);
-	printf("retrieve: %d, insert: %d\r\n",retrieve,insert);
-	printf("Success or fail: %d, pushed value: %d\r\n", get(&value), value);
-	printf("retrieve: %d, insert: %d\r\n",retrieve,insert);
-	/*put(4);
-	put(7);
-	put(2);
 	put(1);
 	put(2);
 	put(3);
@@ -49,19 +46,23 @@ int main(void) {
 	put(5);
 	put(6);
 	put(7);
+	put(8);
+	put(9);
 	put(10);
-	printf("start\r\n");
-	printf("Removed %d from queue\r\n", get());
-	printf("Removed %d from queue\r\n", get());
-	printf("Removed %d from queue\r\n", get());
-	printf("Removed %d from queue\r\n", get());
-	printf("Removed %d from queue\r\n", get());
-	printf("Removed %d from queue\r\n", get());
-	printf("Removed %d from queue\r\n", get());
-	printf("Removed %d from queue\r\n", get());
-	printf("Removed %d from queue\r\n", get());
-	printf("Removed %d from queue\r\n", get());
-	printf("Removed %d from queue\r\n", get());*/
+	printf("Success or fail: %d, pushed value: %d\r\n", get(&value), value);
+	put(11);
+	put(11);
+	printf("Success or fail: %d, pushed value: %d\r\n", get(&value), value);
+	printf("Success or fail: %d, pushed value: %d\r\n", get(&value), value);
+	printf("Success or fail: %d, pushed value: %d\r\n", get(&value), value);
+	printf("Success or fail: %d, pushed value: %d\r\n", get(&value), value);
+	printf("Success or fail: %d, pushed value: %d\r\n", get(&value), value);
+	printf("Success or fail: %d, pushed value: %d\r\n", get(&value), value);
+	printf("Success or fail: %d, pushed value: %d\r\n", get(&value), value);
+	printf("Success or fail: %d, pushed value: %d\r\n", get(&value), value);
+	printf("Success or fail: %d, pushed value: %d\r\n", get(&value), value);
+	printf("Success or fail: %d, pushed value: %d\r\n", get(&value), value);
+
 	printf("finish\r\n");
 }/*
 
