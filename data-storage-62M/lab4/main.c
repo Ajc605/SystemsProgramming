@@ -3,7 +3,8 @@
 #include "heap.h"
 
 int main(void) {
-	serial_init();	
+	serial_init();
+printf("\r\n\r\n");	
 	
 	static heap_t heap;
 	static int heapStore[20];

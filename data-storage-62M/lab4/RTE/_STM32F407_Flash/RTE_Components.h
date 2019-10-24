@@ -3,7 +3,7 @@
  * Auto generated Run-Time-Environment Component Configuration File
  *      *** Do not modify ! ***
  *
- * Project: 'Lab3_1' 
+ * Project: 'lab4' 
  * Target:  'STM32F407 Flash' 
  */
 

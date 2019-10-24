@@ -2,6 +2,19 @@
 
 static void heap_up(heap_t *heap) {
 	// Write me!
+	//Start eith the least element in the heap
+	//if it's the rrot element, stop
+	if((heap->length)-1 != 0){
+		int value = heap->store[(heap->length)-1];
+	} else {
+		printf("First element\r\n");
+	}
+	
+	
+	//Compare it with its parent
+	//if the parent is smaller, stop
+	//swap the element with its parent
+	//with the element in its new location, go back to step 2
 }
 
 static void heap_down(heap_t *heap) {
