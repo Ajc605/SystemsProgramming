@@ -28,14 +28,16 @@ Project File Date:  10/24/2019
 *** Using Compiler 'V5.06 update 4 (build 422)', folder: 'C:\KEIL_V5\ARM\ARMCC\Bin'
 Build target 'STM32F407 Flash'
 compiling heap.c...
-heap.c(8): warning:  #177-D: variable "value"  was declared but never referenced
-  		int value = heap->store[(heap->length)-1];
-heap.c(10): warning:  #223-D: function "printf" declared implicitly
-  		printf("First element\r\n");
-heap.c: 2 warnings, 0 errors
+heap.c(9): warning:  #223-D: function "printf" declared implicitly
+  		printf("position: %d\r\n",position);
+heap.c(35): warning:  #223-D: function "printf" declared implicitly
+  		printf("First\r\n");
+heap.c(52): warning:  #223-D: function "printf" declared implicitly
+  	printf("adding %d\r\n", value);
+heap.c: 3 warnings, 0 errors
 linking...
-Program Size: Code=2278 RO-data=442 RW-data=56 ZI-data=1712  
-".\Flash\lab4.axf" - 0 Error(s), 2 Warning(s).
+Program Size: Code=2454 RO-data=442 RW-data=56 ZI-data=1712  
+".\Flash\lab4.axf" - 0 Error(s), 3 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -62,8 +64,8 @@ Package Vendor: Keil
 
    * Component: Keil::Device:Startup:2.6.0
       Source file:   MDK\Device\Source\ARM\STM32F40xxx_41xxx_OPT.s
-      Include file:  Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
       Source file:   MDK\Device\Source\ARM\STM32F4xx_OTP.s
+      Include file:  Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
       Source file:   Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templates\arm\startup_stm32f407xx.s
       Source file:   Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templates\system_stm32f4xx.c
 Build Time Elapsed:  00:00:00
