@@ -1,0 +1,86 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000                 AREA             asm,CODE
+    2 00000000         
+    3 00000000                 IMPORT           report
+    4 00000000                 EXPORT           fib
+    5 00000000         
+    6 00000000         fib
+    7 00000000         ;ro = past value, r1 is check value
+    8 00000000 E92D 41F0       STMFD            sp!, {r4, r5, r6, r7, r8, lr}
+    9 00000004 4604            MOV              r4, r0
+   10 00000006 F04F 0500       MOV              r5, #0
+   11 0000000A F04F 0601       MOV              r6, #1
+   12 0000000E         loop
+   13 0000000E         
+   14 0000000E EB05 0706       ADD              r7, r5, r6  ; r7 = r5 + r6
+   15 00000012 4630            MOV              r0, r6
+   16 00000014 F7FF FFFE       BL               report
+   17 00000018         
+   18 00000018 4635            MOV              r5, r6      ;Move r6 into r5
+   19 0000001A 463E            MOV              r6, r7      ;Move r7 into r6
+   20 0000001C         
+   21 0000001C 3C01            SUBS             r4, #1      ; r4 - 1 
+   22 0000001E D1F6            BNE              loop
+   23 00000020         
+   24 00000020 E8BD 41F0       LDMFD            sp!, {r4, r5, r6, r7, r8, lr}
+   25 00000024         ; Your code goes here
+   26 00000024         
+   27 00000024                 END
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
+erwork --depend=.\flash\asm.d -o.\flash\asm.o -I.\RTE\_STM32F407_Flash -IC:\KEI
+L_V5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include -IC:\KEIL_V5\ARM\PACK\Keil\STM32F4x
+x_DFP\2.11.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include --predefine="__UVISION_V
+ERSION SETA 523" --predefine="_RTE_ SETA 1" --predefine="STM32F407xx SETA 1" --
+list=.\flash\asm.lst asm.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+asm 00000000
+
+Symbol: asm
+   Definitions
+      At line 1 in file asm.s
+   Uses
+      None
+Comment: asm unused
+fib 00000000
+
+Symbol: fib
+   Definitions
+      At line 6 in file asm.s
+   Uses
+      At line 4 in file asm.s
+Comment: fib used once
+loop 0000000E
+
+Symbol: loop
+   Definitions
+      At line 12 in file asm.s
+   Uses
+      At line 22 in file asm.s
+Comment: loop used once
+3 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+External symbols
+
+report 00000000
+
+Symbol: report
+   Definitions
+      At line 3 in file asm.s
+   Uses
+      At line 16 in file asm.s
+Comment: report used once
+1 symbol
+338 symbols in table
