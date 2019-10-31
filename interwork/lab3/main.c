@@ -14,10 +14,15 @@ typedef struct {
 
 #pragma pack(pop)
 
-void process(structure_t * s){};
+void process(structure_t * s);
+
+void report(uint32_t value) {
+	printf("%d\r\n", value);
+}
+
 
 void printInteger(int *integer) {
-		
+		printf("tring to print\r\n");
 		printf("%d\r\n", *integer);
 	}
 
@@ -33,10 +38,11 @@ int main(void) {
 	test.y = 10;
 	
 	int32_t number = 15;
-	test.ptr = &number;
+	test.ptr = &number; 
 	
-	test.callback(&printInteger);
-	printf("test\r\n");
+	void (*fptr) (int*);
+	fptr = printInteger;
+	test.callback = fptr;
 	
 	process(&test);
 	

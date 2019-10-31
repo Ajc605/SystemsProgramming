@@ -7,23 +7,28 @@ ARM Macro Assembler    Page 1
     1 00000000                 AREA             asm,CODE
     2 00000000         
     3 00000000         ; Your code goes here...
-    4 00000000         process
-    5 00000000 E92D 41F0       STMFD            sp!, {r4, r5, r6, r7, r8, lr}
-    6 00000004         
-    7 00000004 6804            LDR              r4, [r0]
-    8 00000006 6845            LDR              r5, [r0 , #4]
-    9 00000008 6886            LDR              r6, [r0 , #8]
-   10 0000000A 6907            LDR              r7, [r0 , #16]
-   11 0000000C         
-   12 0000000C 51AE            STR              r6, [r5, r6]
-   13 0000000E         
-   14 0000000E 6838            LDR              r0, [r7]
-   15 00000010 47B8            BLX              r7
-   16 00000012         
-   17 00000012 E8BD 41F0       LDMFD            sp!, {r4, r5, r6, r7, r8, lr}
-   18 00000016         
-   19 00000016         
-   20 00000016                 END
+    4 00000000                 IMPORT           report
+    5 00000000                 EXPORT           process
+    6 00000000         
+    7 00000000         process
+    8 00000000 E92D 41F0       STMFD            sp!, {r4, r5, r6, r7, r8, lr}
+    9 00000004         
+   10 00000004 6804            LDR              r4, [r0]
+   11 00000006 6845            LDR              r5, [r0 , #4]
+   12 00000008 6886            LDR              r6, [r0 , #8]
+   13 0000000A 6907            LDR              r7, [r0 , #16]
+   14 0000000C 4425            ADD              r5, r4
+   15 0000000E         
+   16 0000000E 6045            STR              r5, [r0 , #4]
+   17 00000010         ;MOV r0, r5
+   18 00000010         ;BL report
+   19 00000010         
+   20 00000010 47B8            BLX              r7
+   21 00000012         
+   22 00000012 E8BD 41F0       LDMFD            sp!, {r4, r5, r6, r7, r8, lr}
+   23 00000016         
+   24 00000016         
+   25 00000016                 END
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
 erwork --depend=.\flash\asm.d -o.\flash\asm.o -I.\RTE\_STM32F407_Flash -IC:\KEI
 L_V5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include -IC:\KEIL_V5\ARM\PACK\Keil\STM32F4x
@@ -48,9 +53,24 @@ process 00000000
 
 Symbol: process
    Definitions
+      At line 7 in file asm.s
+   Uses
+      At line 5 in file asm.s
+Comment: process used once
+2 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+External symbols
+
+report 00000000
+
+Symbol: report
+   Definitions
       At line 4 in file asm.s
    Uses
       None
-Comment: process unused
-2 symbols
-336 symbols in table
+Comment: report unused
+1 symbol
+337 symbols in table
