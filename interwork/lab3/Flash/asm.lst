@@ -7,15 +7,29 @@ ARM Macro Assembler    Page 1
     1 00000000                 AREA             asm,CODE
     2 00000000         
     3 00000000         ; Your code goes here...
-    4 00000000         
-    5 00000000                 END
+    4 00000000         process
+    5 00000000 E92D 41F0       STMFD            sp!, {r4, r5, r6, r7, r8, lr}
+    6 00000004         
+    7 00000004 6804            LDR              r4, [r0]
+    8 00000006 6845            LDR              r5, [r0 , #4]
+    9 00000008 6886            LDR              r6, [r0 , #8]
+   10 0000000A 6907            LDR              r7, [r0 , #16]
+   11 0000000C         
+   12 0000000C 51AE            STR              r6, [r5, r6]
+   13 0000000E         
+   14 0000000E 6838            LDR              r0, [r7]
+   15 00000010 47B8            BLX              r7
+   16 00000012         
+   17 00000012 E8BD 41F0       LDMFD            sp!, {r4, r5, r6, r7, r8, lr}
+   18 00000016         
+   19 00000016         
+   20 00000016                 END
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
-erwork --depend=.\flash\asm.d -o.\flash\asm.o -IC:\Users\ajp109\Dropbox\ARM\uV5
-\SysProg\interwork\lab3\RTE -IC:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include
- -IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.10.0\Drivers\CMSIS\Device\ST\STM32F
-4xx\Include --predefine="__EVAL SETA 1" --predefine="__UVISION_VERSION SETA 521
-" --predefine="_RTE_ SETA 1" --predefine="STM32F407xx SETA 1" --list=.\flash\as
-m.lst asm.s
+erwork --depend=.\flash\asm.d -o.\flash\asm.o -I.\RTE\_STM32F407_Flash -IC:\KEI
+L_V5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include -IC:\KEIL_V5\ARM\PACK\Keil\STM32F4x
+x_DFP\2.11.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include --predefine="__UVISION_V
+ERSION SETA 523" --predefine="_RTE_ SETA 1" --predefine="STM32F407xx SETA 1" --
+list=.\flash\asm.lst asm.s
 
 
 
@@ -30,5 +44,13 @@ Symbol: asm
    Uses
       None
 Comment: asm unused
-1 symbol
-335 symbols in table
+process 00000000
+
+Symbol: process
+   Definitions
+      At line 4 in file asm.s
+   Uses
+      None
+Comment: process unused
+2 symbols
+336 symbols in table
