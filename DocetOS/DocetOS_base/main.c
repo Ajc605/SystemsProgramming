@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "utils/serial.h"
 #include "simpleRoundRobin.h"
+#include "utils.h"
 
 void task1(void const *const args) {
 	for (int i = 0; i < 100; ++i) {
@@ -21,6 +22,11 @@ void task3(void const *const args) {
 	}
 }
 
+void task4(void const *const args) {
+	reportState();
+}
+
+
 /* MAIN FUNCTION */
 
 int main(void) {
@@ -33,24 +39,27 @@ int main(void) {
 	   Remember that stacks must be 8-byte aligned. */
 	__align(8)
 	//Set up values for functions in OS
-	static uint32_t stack1[64], stack2[64], stack3[64];
-	static OS_TCB_t TCB1, TCB2, TCB3;
+	static uint32_t stack1[64], stack2[64], stack3[64], stack4[64];
+	static OS_TCB_t TCB1, TCB2, TCB3, TCB4;
 
 	/* Initialise the TCBs using the two functions above */
 	//Creating function in OS
 	OS_initialiseTCB(&TCB1, stack1+64, task1, NULL);
 	OS_initialiseTCB(&TCB2, stack2+64, task2, NULL);
 	OS_initialiseTCB(&TCB3, stack3+64, task3, NULL);
+	OS_initialiseTCB(&TCB4, stack4+64, task4, NULL);
 	OS_init(&simpleRoundRobinScheduler);
-
+	
 	
 
 	/* Initialise and start the OS */
 	
 	//Calling functions in OS
-	OS_addTask(&TCB1);
-	OS_addTask(&TCB2);
-	OS_addTask(&TCB3);
+	OS_addTask(&TCB4);
+	//OS_addTask(&TCB1);
+	//OS_addTask(&TCB2);
+	//OS_addTask(&TCB3);
+	
 	
 	OS_start();
 	
