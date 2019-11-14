@@ -57,7 +57,7 @@ int main(void) {
 	//Calling functions in OS
 	OS_addTask(&TCB4);
 	//OS_addTask(&TCB1);
-	//OS_addTask(&TCB2);
+	OS_addTask(&TCB2);
 	//OS_addTask(&TCB3);
 	
 	
