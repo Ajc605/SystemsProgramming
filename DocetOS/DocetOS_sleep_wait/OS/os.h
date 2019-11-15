@@ -20,6 +20,8 @@ enum OS_SVC_e {
 typedef struct {
 	uint_fast8_t preemptive;
 	OS_TCB_t const * (* scheduler_callback)(void);
+	void (* wait_callback) (void * const reason);
+	void (* notify_callback) (void * const reason);
 	void (* addtask_callback)(OS_TCB_t * const newTask);
 	void (* taskexit_callback)(OS_TCB_t * const task);
 } OS_Scheduler_t;

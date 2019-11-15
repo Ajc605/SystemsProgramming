@@ -45,4 +45,7 @@ typedef struct {
 /* Constants that define bits in a thread's 'state' field. */
 #define TASK_STATE_YIELD    (1UL << 0) // Bit zero is the 'yield' flag
 
+/* Setting a flag that indicates task is asleep*/
+#define	TAK_STATE_SLEEP			(1UL << 1) // Bit zero is the 'sleep' flag
+
 #endif /* _TASK_H_ */

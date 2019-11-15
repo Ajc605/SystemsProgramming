@@ -1,4 +1,5 @@
 #include "os.h"
+#include "sleep.h"
 #include <stdio.h>
 #include "utils/serial.h"
 #include "simpleRoundRobin.h"
@@ -6,11 +7,13 @@
 void task1(void const *const args) {
 	while (1) {
 		printf("Message from Task 1\r\n");
+		//OS_sleep(100);
 	}
 }
 void task2(void const *const args) {
 	while (1) {
 		printf("Message from Task 2\r\n");
+		//OS_sleep(20);
 	}
 }
 

@@ -16,6 +16,8 @@
 static OS_TCB_t const * simpleRoundRobin_scheduler(void);
 static void simpleRoundRobin_addTask(OS_TCB_t * const tcb);
 static void simpleRoundRobin_taskExit(OS_TCB_t * const tcb);
+static void simpleRoundRobin_wait(OS_TCB_t * const tcb);
+static void simpleRoundRobin_notify(OS_TCB_t * const tcb);
 
 static OS_TCB_t * tasks[SIMPLE_RR_MAX_TASKS] = {0};
 
@@ -24,7 +26,9 @@ OS_Scheduler_t const simpleRoundRobinScheduler = {
 	.preemptive = 1,
 	.scheduler_callback = simpleRoundRobin_scheduler,
 	.addtask_callback = simpleRoundRobin_addTask,
-	.taskexit_callback = simpleRoundRobin_taskExit
+	.taskexit_callback = simpleRoundRobin_taskExit,
+	.wait_callback = simpleRoundRobin_wait,
+	.notify_callback = simpleRoundRobin_notify
 };
 
 
@@ -35,9 +39,22 @@ static OS_TCB_t const * simpleRoundRobin_scheduler(void) {
 	OS_currentTCB()->state &= ~TASK_STATE_YIELD;
 	for (int j = 1; j <= SIMPLE_RR_MAX_TASKS; j++) {
 		i = (i + 1) % SIMPLE_RR_MAX_TASKS;
+	
+		if ((0 == (tasks[i] && 0x02)) && tasks[i] != 0) {
+			/// TASK_STATE_SLEEP is clear 
+			return tasks[i];
+		} else if (0 != (tasks[i] && 0x02)) {
+			// TASK_STATE_SLEEP is set and need to check if its time to run
+			if (tasks[i]->data <= OS_elapsedTicks()) {
+				tasks[i]->data = 0;
+				return tasks[i];
+			}				
+		}
+		
+		/* Old code
 		if (tasks[i] != 0) {
 			return tasks[i];
-		}
+		} */
 	}
 	// No tasks in the list, so return the idle task
 	return OS_idleTCB_p;
@@ -62,4 +79,12 @@ static void simpleRoundRobin_taskExit(OS_TCB_t * const tcb) {
 			tasks[i] = 0;
 		}
 	}	
+}
+
+static void simpleRoundRobin_wait(OS_TCB_t * const tcb) {
+	
+}
+
+static void simpleRoundRobin_notify(OS_TCB_t * const tcb) {
+	
 }

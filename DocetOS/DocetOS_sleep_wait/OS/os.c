@@ -56,6 +56,8 @@ void OS_init(OS_Scheduler_t const * scheduler) {
 	ASSERT(_scheduler->scheduler_callback);
 	ASSERT(_scheduler->addtask_callback);
 	ASSERT(_scheduler->taskexit_callback);
+	ASSERT(_scheduler->wait_callback);
+	ASSERT(_scheduler->notify_callback);
 }
 
 /* Starts the OS and never returns. */
