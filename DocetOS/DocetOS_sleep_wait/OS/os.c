@@ -43,6 +43,16 @@ void _svc_OS_yield(void) {
 	SCB->ICSR = SCB_ICSR_PENDSVSET_Msk;
 }
 
+void _svc_OS_wait (void* reason) {
+	_OS_SVC_StackFrame_t * stack = reason;
+	_scheduler->wait_callback((OS_TCB_t *)stack->r0);
+}
+
+void _svc_OS_notify (void* reason) {
+	_OS_SVC_StackFrame_t * stack = reason;
+	_scheduler->notify_callback((OS_TCB_t *)stack->r0);
+}
+
 /* SVC handler for OS_schedule().  Simply schedules PendSV */
 void _svc_OS_schedule(void) {
 	SCB->ICSR = SCB_ICSR_PENDSVSET_Msk;
@@ -122,4 +132,6 @@ void _svc_OS_task_exit(void) {
 	_scheduler->taskexit_callback(_currentTCB);
 	SCB->ICSR = SCB_ICSR_PENDSVSET_Msk;
 }
+
+
 

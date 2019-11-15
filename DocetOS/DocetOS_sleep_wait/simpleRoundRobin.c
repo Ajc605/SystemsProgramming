@@ -1,4 +1,5 @@
 #include "simpleRoundRobin.h"
+#include <stm32f4xx.h>
 
 /* This is an implementation of an extremely simple (and inefficient!) round-robin scheduler.
 
@@ -16,8 +17,8 @@
 static OS_TCB_t const * simpleRoundRobin_scheduler(void);
 static void simpleRoundRobin_addTask(OS_TCB_t * const tcb);
 static void simpleRoundRobin_taskExit(OS_TCB_t * const tcb);
-static void simpleRoundRobin_wait(OS_TCB_t * const tcb);
-static void simpleRoundRobin_notify(OS_TCB_t * const tcb);
+static void simpleRoundRobin_wait(void * const reason);
+static void simpleRoundRobin_notify(void * const reason);
 
 static OS_TCB_t * tasks[SIMPLE_RR_MAX_TASKS] = {0};
 
@@ -39,22 +40,20 @@ static OS_TCB_t const * simpleRoundRobin_scheduler(void) {
 	OS_currentTCB()->state &= ~TASK_STATE_YIELD;
 	for (int j = 1; j <= SIMPLE_RR_MAX_TASKS; j++) {
 		i = (i + 1) % SIMPLE_RR_MAX_TASKS;
-	
-		if ((0 == (tasks[i] && 0x02)) && tasks[i] != 0) {
-			/// TASK_STATE_SLEEP is clear 
-			return tasks[i];
-		} else if (0 != (tasks[i] && 0x02)) {
-			// TASK_STATE_SLEEP is set and need to check if its time to run
-			if (tasks[i]->data <= OS_elapsedTicks()) {
-				tasks[i]->data = 0;
-				return tasks[i];
-			}				
-		}
-		
-		/* Old code
 		if (tasks[i] != 0) {
-			return tasks[i];
-		} */
+			if (!(tasks[i]->state & TASK_STATE_WAIT)) {
+				if (!(tasks[i]->state & TASK_STATE_SLEEP)) {
+					/// TASK_STATE_SLEEP is clear 
+					return tasks[i];
+				} else {
+					// TASK_STATE_SLEEP is set and need to check if its time to run
+					if (tasks[i]->data < OS_elapsedTicks()) {
+						tasks[i]->data = 0;
+						return tasks[i];
+					}				
+				}
+			}
+		}
 	}
 	// No tasks in the list, so return the idle task
 	return OS_idleTCB_p;
@@ -81,10 +80,18 @@ static void simpleRoundRobin_taskExit(OS_TCB_t * const tcb) {
 	}	
 }
 
-static void simpleRoundRobin_wait(OS_TCB_t * const tcb) {
-	
+static void simpleRoundRobin_wait(void * const reason) {
+	OS_currentTCB()->data = (uint32_t)reason;
+	OS_currentTCB()->state |= TASK_STATE_WAIT;
+	SCB->ICSR = SCB_ICSR_PENDSVSET_Msk;
 }
 
-static void simpleRoundRobin_notify(OS_TCB_t * const tcb) {
-	
+static void simpleRoundRobin_notify(void * const reason) {
+	for (int i = 0; i < SIMPLE_RR_MAX_TASKS; i++) {
+		if ((!(tasks[i]->state & TASK_STATE_WAIT))&& (tasks[i]->data == (uint32_t)reason)) {
+			tasks[i]->state &= ~TASK_STATE_WAIT;
+			tasks[i]->data = 0;
+		}
+	}
 }
+

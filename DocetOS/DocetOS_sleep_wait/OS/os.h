@@ -13,7 +13,9 @@ enum OS_SVC_e {
 	OS_SVC_ADD_TASK,
 	OS_SVC_EXIT,
 	OS_SVC_YIELD,
-	OS_SVC_SCHEDULE
+	OS_SVC_SCHEDULE,
+	OS_SVC_WAIT,
+	OS_SVC_NOTIFY
 };
 
 /* A structure to hold callbacks for a scheduler, plus a 'preemptive' flag */
@@ -69,6 +71,12 @@ void __svc(OS_SVC_ADD_TASK) OS_addTask(OS_TCB_t const * const);
 
 /* SVC delegate to yield the current task */
 void __svc(OS_SVC_YIELD) OS_yield(void);
+
+/* SVC delegate to wait another task to complete */
+void __svc(OS_SVC_WAIT) OS_wait(void* reason);
+
+/* SVC delegate to notify other task of a completion */
+void __svc(OS_SVC_NOTIFY) OS_notify(void* reason);
 
 /****************/
 /* Declarations */
