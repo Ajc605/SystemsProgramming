@@ -5,7 +5,11 @@
 void reportState() {
 	uint32_t psr = getPSR();
 	uint32_t control = getCONTROL();
-	if((psr & 0x1FF)==0) {
+	
+	printf("psr %u\n\r",(int)psr);
+	printf("control %u\n\r",(int)control);
+	
+	if((psr & 0x09)==0) {
 		printf("Thread mode\r\n");
 	} else {
 		printf("Handler mode\r\n");
@@ -16,9 +20,12 @@ void reportState() {
 	} else {
 		printf("PSP\r\n");
 	} 
+	
+	if(!((control & 0x01)==0)) {
+		printf("privileged\r\n");
+	}
 }
 
 void _svc_report_state(void) {
 	reportState();
-
 }

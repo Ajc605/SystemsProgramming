@@ -10,5 +10,5 @@ getPSR
 getCONTROL
 	MRS r0, control
 	
-	END
+END
 	

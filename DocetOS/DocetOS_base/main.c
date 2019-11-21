@@ -3,13 +3,15 @@
 #include "utils/serial.h"
 #include "simpleRoundRobin.h"
 #include "utils.h"
+#include "stm32f4xx.h"
 
 void task1(void const *const args) {
 	for (int i = 0; i < 100; ++i) {
 		printf("A");
 	}
+	report_state();
 }
-#include "stm32f4xx.h"
+
 void task2(void const *const args) {
 	for (int i = 0; i < 200; ++i) {
 		printf("B");
@@ -26,6 +28,10 @@ void task4(void const *const args) {
 	reportState();
 }
 
+void task5 (void const *const args) {
+	report_state();
+}
+
 
 /* MAIN FUNCTION */
 
@@ -34,13 +40,14 @@ int main(void) {
 	serial_init();
 
 	printf("\r\nDocetOS Demo\r\n");
+	report_state();
 
 	/* Reserve memory for two stacks and two TCBs.
 	   Remember that stacks must be 8-byte aligned. */
 	__align(8)
 	//Set up values for functions in OS
-	static uint32_t stack1[64], stack2[64], stack3[64], stack4[64];
-	static OS_TCB_t TCB1, TCB2, TCB3, TCB4;
+	static uint32_t stack1[64], stack2[64], stack3[64], stack4[64], stack5[64];
+	static OS_TCB_t TCB1, TCB2, TCB3, TCB4, TCB5;
 
 	/* Initialise the TCBs using the two functions above */
 	//Creating function in OS
@@ -48,6 +55,8 @@ int main(void) {
 	OS_initialiseTCB(&TCB2, stack2+64, task2, NULL);
 	OS_initialiseTCB(&TCB3, stack3+64, task3, NULL);
 	OS_initialiseTCB(&TCB4, stack4+64, task4, NULL);
+	OS_initialiseTCB(&TCB5, stack5+64, task5, NULL);
+	
 	OS_init(&simpleRoundRobinScheduler);
 	
 	
@@ -55,10 +64,10 @@ int main(void) {
 	/* Initialise and start the OS */
 	
 	//Calling functions in OS
-	OS_addTask(&TCB4);
-	//OS_addTask(&TCB1);
-	OS_addTask(&TCB2);
+	OS_addTask(&TCB1);
+	//OS_addTask(&TCB2);
 	//OS_addTask(&TCB3);
+	//OS_addTask(&TCB4);
 	
 	
 	OS_start();
