@@ -41,12 +41,14 @@ static OS_TCB_t const * simpleRoundRobin_scheduler(void) {
 	for (int j = 1; j <= SIMPLE_RR_MAX_TASKS; j++) {
 		i = (i + 1) % SIMPLE_RR_MAX_TASKS;
 		if (tasks[i] != 0) {
+			/* Check if the task is in a wait state */
 			if (!(tasks[i]->state & TASK_STATE_WAIT)) {
+				/* Check if the task is in a sleep state */
 				if (!(tasks[i]->state & TASK_STATE_SLEEP)) {
-					/// TASK_STATE_SLEEP is clear 
+					/* TASK_STATE_SLEEP is clear */
 					return tasks[i];
 				} else {
-					// TASK_STATE_SLEEP is set and need to check if its time to run
+					/* TASK_STATE_SLEEP is set and need to check if its time to run */
 					if (tasks[i]->data < OS_elapsedTicks()) {
 						tasks[i]->data = 0;
 						return tasks[i];
@@ -88,6 +90,7 @@ static void simpleRoundRobin_wait(void * const reason) {
 
 static void simpleRoundRobin_notify(void * const reason) {
 	for (int i = 0; i < SIMPLE_RR_MAX_TASKS; i++) {
+		/* if the tasl is waiting the the reason is the same */
 		if ((!(tasks[i]->state & TASK_STATE_WAIT))&& (tasks[i]->data == (uint32_t)reason)) {
 			tasks[i]->state &= ~TASK_STATE_WAIT;
 			tasks[i]->data = 0;

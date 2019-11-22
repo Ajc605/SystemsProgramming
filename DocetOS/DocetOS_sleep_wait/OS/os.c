@@ -132,6 +132,3 @@ void _svc_OS_task_exit(void) {
 	_scheduler->taskexit_callback(_currentTCB);
 	SCB->ICSR = SCB_ICSR_PENDSVSET_Msk;
 }
-
-
-

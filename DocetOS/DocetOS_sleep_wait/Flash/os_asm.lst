@@ -153,9 +153,9 @@ ARM Macro Assembler    Page 3
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
 erwork --depend=.\flash\os_asm.d -o.\flash\os_asm.o -I.\RTE\_STM32F407_Flash -I
 C:\KEIL_V5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include -IC:\KEIL_V5\ARM\PACK\Keil\ST
-M32F4xx_DFP\2.11.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include --predefine="__UVI
-SION_VERSION SETA 523" --predefine="_RTE_ SETA 1" --predefine="STM32F407xx SETA
- 1" --list=.\flash\os_asm.lst OS\os_asm.s
+M32F4xx_DFP\2.11.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include --predefine="__EVA
+L SETA 1" --predefine="__UVISION_VERSION SETA 523" --predefine="_RTE_ SETA 1" -
+-predefine="STM32F407xx SETA 1" --list=.\flash\os_asm.lst OS\os_asm.s
 
 
 
@@ -320,4 +320,4 @@ Symbol: _svc_OS_yield
       At line 49 in file OS\os_asm.s
 Comment: _svc_OS_yield used once
 9 symbols
-353 symbols in table
+354 symbols in table
