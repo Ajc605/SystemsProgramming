@@ -9,6 +9,6 @@ uint32_t getCONTROL(void);
 
 void  reportState(void);
 
-uint32_t _svc_report_state(_OS_SVC_StackFrame_t const * const stack
+//uint32_t _svc_report_state(_OS_SVC_StackFrame_t const * const stack
 
 #endif /* UTILS_H */

@@ -28,6 +28,6 @@ void reportState() {
 
 uint32_t _svc_report_state(_OS_SVC_StackFrame_t const * const stack) {
 	uint32_t val = stack->r0;
-	stack->ro =val*val;
+	//stack->ro =val*val;
 	return val;
 }
