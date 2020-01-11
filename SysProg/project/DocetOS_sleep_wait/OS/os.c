@@ -15,6 +15,8 @@ OS_TCB_t const * const OS_idleTCB_p = &OS_idleTCB;
 /* Total elapsed ticks */
 static volatile uint32_t _ticks = 0;
 
+static volatile uint32_t _check = 0;
+
 /* Pointer to the 'scheduler' struct containing callback pointers */
 static OS_Scheduler_t const * _scheduler = 0;
 
@@ -24,6 +26,10 @@ OS_TCB_t * volatile _currentTCB = 0;
    to change the pointer itself. */
 OS_TCB_t * OS_currentTCB() {
 	return _currentTCB;
+}
+
+uint32_t checkSum() {
+	return _check;
 }
 
 /* Getter for the current time. */
@@ -126,7 +132,7 @@ void _svc_OS_task_exit(void) {
 /* SVC handler that's called by _OS_wait when a task finishes.  Invokes the
    task end callback and then queues PendSV to call the scheduler. */
 void _svc_OS_wait() {
-	_scheduler->wait_callback(_currentTCB);
+	_scheduler->wait_callback(_currentTCB,_check);
 	SCB->ICSR = SCB_ICSR_PENDSVSET_Msk;
 }
 
@@ -135,5 +141,6 @@ void _svc_OS_wait() {
 void _svc_OS_notify() {
 	_scheduler->notify_callback(_currentTCB);
 	SCB->ICSR = SCB_ICSR_PENDSVSET_Msk;
+	_check++;
 }
 

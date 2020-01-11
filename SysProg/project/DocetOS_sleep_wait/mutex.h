@@ -8,10 +8,10 @@ typedef struct {
 	uint32_t counter;
 } OS_mutex_t;
 
-void initialiseMutex(OS_mutex_t * mutex);
+void initialiseMutex(OS_mutex_t * prtMutex);
 
-void OS_mutex_acquire(OS_mutex_t * mutex);
+void OS_mutex_acquire(OS_mutex_t * prtMutex);
 
-void OS_mutex_release(OS_mutex_t * mutex);
+void OS_mutex_release(OS_mutex_t * prtMutex);
 
 #endif /* MUTEX_H */
