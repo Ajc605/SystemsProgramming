@@ -10,7 +10,8 @@
       <TargetName>STM32F407 Flash</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060300::V5.06 update 3 (build 300)::ARMCC</pCCUsed>
+      <pArmCC>5060422::V5.06 update 4 (build 422)::ARMCC</pArmCC>
+      <pCCUsed>5060422::V5.06 update 4 (build 422)::ARMCC</pCCUsed>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32F407VG</Device>
@@ -438,6 +439,26 @@
               <FileName>simpleRoundRobin.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\simpleRoundRobin.h</FilePath>
+            </File>
+            <File>
+              <FileName>sleep.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\sleep.c</FilePath>
+            </File>
+            <File>
+              <FileName>sleep.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\sleep.h</FilePath>
+            </File>
+            <File>
+              <FileName>mutex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\mutex.c</FilePath>
+            </File>
+            <File>
+              <FileName>mutex.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\mutex.h</FilePath>
             </File>
           </Files>
         </Group>

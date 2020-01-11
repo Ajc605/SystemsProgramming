@@ -123,3 +123,12 @@ void _svc_OS_task_exit(void) {
 	SCB->ICSR = SCB_ICSR_PENDSVSET_Msk;
 }
 
+
+void _svc_OS_wait(void * reason) {
+	_scheduler->wait_callback((OS_TCB_t *)reason);
+}
+
+void _svc_OS_notify(void * reason){ 
+	_scheduler->notify_callback((OS_TCB_t *)reason);
+}
+
