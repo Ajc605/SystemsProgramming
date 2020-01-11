@@ -1,4 +1,5 @@
 #include "mutex.h"
+#include "os.h"
 
 void initialiseMutex(OS_mutex_t * prtMutex) {
 	prtMutex->counter = 0;
@@ -16,7 +17,7 @@ void OS_mutex_acquire(OS_mutex_t * prtMutex) {
 			}
 		} else { 
 			if (mutexTCBField != (uint32_t)prtCurTBC) {
-				OS_wait(prtMutex);
+				OS_wait(prtMutex, checksum());
 			}
 		}
 	}

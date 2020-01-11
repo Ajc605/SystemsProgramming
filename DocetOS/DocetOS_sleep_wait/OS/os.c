@@ -14,6 +14,11 @@ OS_TCB_t const * const OS_idleTCB_p = &OS_idleTCB;
 
 /* Total elapsed ticks */
 static volatile uint32_t _ticks = 0;
+static volatile uint32_t check = 0;
+
+uint32_t checksum() {
+	return check;
+}
 
 /* Pointer to the 'scheduler' struct containing callback pointers */
 static OS_Scheduler_t const * _scheduler = 0;
@@ -124,11 +129,12 @@ void _svc_OS_task_exit(void) {
 }
 
 
-void _svc_OS_wait(void * reason) {
-	_scheduler->wait_callback((OS_TCB_t *)reason);
+void _svc_OS_wait(void * reason, uint32_t check) {
+	_scheduler->wait_callback((OS_TCB_t *)reason,(uint32_t)check);
 }
 
 void _svc_OS_notify(void * reason){ 
+	check++;
 	_scheduler->notify_callback((OS_TCB_t *)reason);
 }
 

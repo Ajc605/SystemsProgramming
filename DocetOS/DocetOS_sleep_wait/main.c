@@ -20,8 +20,17 @@ void task2(void const *const args) {
 		OS_mutex_acquire(&mutex);
 		printf("Message from Task 2\r\n");
 		OS_mutex_release(&mutex);
-		OS_sleep(100);
+		OS_sleep(95);
 	}
+}
+
+void task3(void const *const args) {
+	while (1) {
+		OS_mutex_acquire(&mutex);
+		printf("Message from Task 3\r\n");
+		OS_mutex_release(&mutex);
+		OS_sleep(95);
+}
 }
 
 /* MAIN FUNCTION */
@@ -35,16 +44,18 @@ int main(void) {
 	/* Reserve memory for two stacks and two TCBs.
 	   Remember that stacks must be 8-byte aligned. */
 	__align(8)
-	static uint32_t stack1[64], stack2[64];
-	static OS_TCB_t TCB1, TCB2;
+	static uint32_t stack1[64], stack2[64], stack3[64];
+	static OS_TCB_t TCB1, TCB2, TCB3;
 
 	/* Initialise the TCBs using the two functions above */
 	OS_initialiseTCB(&TCB1, stack1+64, task1, 0);
 	OS_initialiseTCB(&TCB2, stack2+64, task2, 0);
+	OS_initialiseTCB(&TCB3, stack3+64, task3, 0);
 	initialiseMutex(&mutex);
 	/* Initialise and start the OS */
 	OS_init(&simpleRoundRobinScheduler);
 	OS_addTask(&TCB1);
 	OS_addTask(&TCB2);
+	OS_addTask(&TCB3);
 	OS_start();
 }

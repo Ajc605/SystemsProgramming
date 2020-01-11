@@ -24,7 +24,7 @@ typedef struct {
 	OS_TCB_t const * (* scheduler_callback)(void);
 	void (* addtask_callback)(OS_TCB_t * const newTask);
 	void (* taskexit_callback)(OS_TCB_t * const task);
-	void (* wait_callback) (void * const reason);
+	void (* wait_callback) (void * const reason, uint32_t check);
 	void (* notify_callback) (void * const reason);
 } OS_Scheduler_t;
 
@@ -43,7 +43,7 @@ void OS_start(void);
 OS_TCB_t * OS_currentTCB(void);
 
 /* Returnts the checksum value */ 
-uint32_t checkSum(void);
+uint32_t checksum(void);
 
 /* Returns the number of elapsed systicks since the last reboot (modulo 2^32). */
 uint32_t OS_elapsedTicks(void);
@@ -75,7 +75,7 @@ void __svc(OS_SVC_ADD_TASK) OS_addTask(OS_TCB_t const * const);
 /* SVC delegate to yield the current task */
 void __svc(OS_SVC_YIELD) OS_yield(void);
 
-void __svc(OS_SVC_WAIT) OS_wait(void * reason);
+void __svc(OS_SVC_WAIT) OS_wait(void * reason, uint32_t check);
 
 void __svc(OS_SVC_NOTIFY) OS_notify(void * reason);
 
