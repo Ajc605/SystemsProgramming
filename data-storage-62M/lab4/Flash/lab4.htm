@@ -3,11 +3,11 @@
 <title>Static Call Graph - [.\Flash\lab4.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Flash\lab4.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060422: Last Updated: Thu Oct 24 14:52:42 2019
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060422: Last Updated: Sun Jan 12 22:35:35 2020
 <BR><P>
-<H3>Maximum Stack Usage =        176 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
+<H3>Maximum Stack Usage =        152 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
-__rt_entry_main &rArr; main &rArr; heap_insert &rArr; heap_up &rArr;  heap_up (Cycle)
+__rt_entry_main &rArr; main &rArr; heap_insert &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 <P>
 <H3>
 Functions with no stack information
@@ -28,7 +28,6 @@ Mutually Recursive functions
  <LI><a href="#[b]">PendSV_Handler</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[b]">PendSV_Handler</a><BR>
  <LI><a href="#[c]">SysTick_Handler</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[c]">SysTick_Handler</a><BR>
  <LI><a href="#[1f]">ADC_IRQHandler</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[1f]">ADC_IRQHandler</a><BR>
- <LI><a href="#[80]">heap_up</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[80]">heap_up</a><BR>
 </UL>
 <P>
 <H3>
@@ -259,8 +258,8 @@ Global Symbols
 <P><STRONG><a name="[ac]"></a>__rt_entry_postsh_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$00000009))
 
 <P><STRONG><a name="[6f]"></a>__rt_entry_main</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$0000000D))
-<BR><BR>[Stack]<UL><LI>Max Depth = 176 + Unknown Stack Size
-<LI>Call Chain = __rt_entry_main &rArr; main &rArr; heap_insert &rArr; heap_up &rArr;  heap_up (Cycle)
+<BR><BR>[Stack]<UL><LI>Max Depth = 152 + Unknown Stack Size
+<LI>Call Chain = __rt_entry_main &rArr; main &rArr; heap_insert &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;exit
 <LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
@@ -314,9 +313,9 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[70]"></a>main</STRONG> (Thumb, 212 bytes, Stack size 8 bytes, main.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 176 + Unknown Stack Size
-<LI>Call Chain = main &rArr; heap_insert &rArr; heap_up &rArr;  heap_up (Cycle)
+<P><STRONG><a name="[70]"></a>main</STRONG> (Thumb, 246 bytes, Stack size 8 bytes, main.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 152 + Unknown Stack Size
+<LI>Call Chain = main &rArr; heap_insert &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 <LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;heap_isEmpty
@@ -333,8 +332,8 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[7d]"></a>heap_insert</STRONG> (Thumb, 34 bytes, Stack size 16 bytes, heap.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 168 + Unknown Stack Size
-<LI>Call Chain = heap_insert &rArr; heap_up &rArr;  heap_up (Cycle)
+<BR><BR>[Stack]<UL><LI>Max Depth = 144 + Unknown Stack Size
+<LI>Call Chain = heap_insert &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 <LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;heap_up
@@ -343,7 +342,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[7e]"></a>heap_extract</STRONG> (Thumb, 32 bytes, Stack size 16 bytes, heap.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = heap_extract
+<BR><BR>[Stack]<UL><LI>Max Depth = 36<LI>Call Chain = heap_extract &rArr; heap_down
 </UL>
 <BR>[Calls]<UL><LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;heap_down
 </UL>
@@ -698,8 +697,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_char_file
 </UL>
-<BR>[Called By]<UL><LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;heap_up
-<LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;heap_insert
+<BR>[Called By]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;heap_insert
 <LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
@@ -797,20 +795,16 @@ Local Symbols
 <BR>[Called By]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;serial_init
 </UL>
 
-<P><STRONG><a name="[80]"></a>heap_up</STRONG> (Thumb, 132 bytes, Stack size 24 bytes, heap.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 152 + Unknown Stack Size
- + In Cycle
-<LI>Call Chain = heap_up &rArr;  heap_up (Cycle)
+<P><STRONG><a name="[80]"></a>heap_up</STRONG> (Thumb, 84 bytes, Stack size 16 bytes, heap.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = heap_up
 </UL>
-<BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
-<LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;heap_up
-</UL>
-<BR>[Called By]<UL><LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;heap_up
-<LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;heap_insert
+<BR>[Called By]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;heap_insert
 </UL>
 
-<P><STRONG><a name="[81]"></a>heap_down</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, heap.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;heap_extract
+<P><STRONG><a name="[81]"></a>heap_down</STRONG> (Thumb, 148 bytes, Stack size 20 bytes, heap.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = heap_down
+</UL>
+<BR>[Called By]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;heap_extract
 </UL>
 
 <P><STRONG><a name="[82]"></a>SetSysClock</STRONG> (Thumb, 220 bytes, Stack size 12 bytes, system_stm32f4xx.o(.text))

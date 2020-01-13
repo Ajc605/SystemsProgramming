@@ -22,22 +22,20 @@ Dialog DLL:      TCM.DLL V1.27.0.0
  
 <h2>Project:</h2>
 C:\tmp\ajc605\SystemsProgramming\data-storage-62M\lab4\lab4.uvprojx
-Project File Date:  10/24/2019
+Project File Date:  01/11/2020
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 4 (build 422)', folder: 'C:\KEIL_V5\ARM\ARMCC\Bin'
-Build target 'STM32F407 Flash'
+Rebuild target 'STM32F407 Flash'
+assembling startup_stm32f407xx.s...
+compiling main.c...
 compiling heap.c...
-heap.c(9): warning:  #223-D: function "printf" declared implicitly
-  		printf("position: %d\r\n",position);
-heap.c(35): warning:  #223-D: function "printf" declared implicitly
-  		printf("First\r\n");
-heap.c(52): warning:  #223-D: function "printf" declared implicitly
-  	printf("adding %d\r\n", value);
-heap.c: 3 warnings, 0 errors
+compiling serial.c...
+compiling retarget.c...
+compiling system_stm32f4xx.c...
 linking...
-Program Size: Code=2454 RO-data=442 RW-data=56 ZI-data=1712  
-".\Flash\lab4.axf" - 0 Error(s), 3 Warning(s).
+Program Size: Code=2534 RO-data=442 RW-data=56 ZI-data=1712  
+".\Flash\lab4.axf" - 0 Error(s), 0 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -63,12 +61,12 @@ Package Vendor: Keil
    * Component: ARM::CMSIS:CORE:5.0.1
 
    * Component: Keil::Device:Startup:2.6.0
-      Source file:   MDK\Device\Source\ARM\STM32F40xxx_41xxx_OPT.s
-      Source file:   MDK\Device\Source\ARM\STM32F4xx_OTP.s
       Include file:  Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
+      Source file:   MDK\Device\Source\ARM\STM32F4xx_OTP.s
       Source file:   Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templates\arm\startup_stm32f407xx.s
+      Source file:   MDK\Device\Source\ARM\STM32F40xxx_41xxx_OPT.s
       Source file:   Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templates\system_stm32f4xx.c
-Build Time Elapsed:  00:00:00
+Build Time Elapsed:  00:00:02
 </pre>
 </body>
 </html>
