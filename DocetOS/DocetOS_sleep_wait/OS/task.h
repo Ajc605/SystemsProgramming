@@ -38,7 +38,8 @@ typedef struct {
 	/* The remaining fields are provided for expandability.  None of them have a dedicated
 	   purpose, but their names might imply a use.  Feel free to use these fields for anything
 	   you like. */
-	uint32_t volatile priority;
+	uint32_t volatile priority_assigned;
+	uint32_t volatile priority_affected;
 	uint32_t volatile data;
 } OS_TCB_t;
 

@@ -48,9 +48,9 @@ int main(void) {
 	static OS_TCB_t TCB1, TCB2, TCB3;
 
 	/* Initialise the TCBs using the two functions above */
-	OS_initialiseTCB(&TCB1, stack1+64, task1, 0);
-	OS_initialiseTCB(&TCB2, stack2+64, task2, 0);
-	OS_initialiseTCB(&TCB3, stack3+64, task3, 0);
+	OS_initialiseTCB(&TCB1, stack1+64, task1, 0, 0);
+	OS_initialiseTCB(&TCB2, stack2+64, task2, 0, 1);
+	OS_initialiseTCB(&TCB3, stack3+64, task3, 0, 2);
 	initialiseMutex(&mutex);
 	/* Initialise and start the OS */
 	OS_init(&simpleRoundRobinScheduler);

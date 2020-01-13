@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Flash\DocetOS_sleep_wait.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Flash\DocetOS_sleep_wait.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060422: Last Updated: Sat Jan 11 20:42:52 2020
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060422: Last Updated: Mon Jan 13 14:30:02 2020
 <BR><P>
 <H3>Maximum Stack Usage =        136 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -354,7 +354,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> main.o(.text)
 </UL>
-<P><STRONG><a name="[7b]"></a>main</STRONG> (Thumb, 86 bytes, Stack size 8 bytes, main.o(.text))
+<P><STRONG><a name="[7b]"></a>main</STRONG> (Thumb, 98 bytes, Stack size 8 bytes, main.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 136 + Unknown Stack Size
 <LI>Call Chain = main &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
@@ -410,8 +410,8 @@ Global Symbols
 <P><STRONG><a name="[97]"></a>_OS_task_end</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, os.o(.text))
 <BR>[Address Reference Count : 1]<UL><LI> os.o(.text)
 </UL>
-<P><STRONG><a name="[8e]"></a>OS_initialiseTCB</STRONG> (Thumb, 56 bytes, Stack size 24 bytes, os.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 28<LI>Call Chain = OS_initialiseTCB &rArr; __aeabi_memclr4
+<P><STRONG><a name="[8e]"></a>OS_initialiseTCB</STRONG> (Thumb, 68 bytes, Stack size 32 bytes, os.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 36<LI>Call Chain = OS_initialiseTCB &rArr; __aeabi_memclr4
 </UL>
 <BR>[Calls]<UL><LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 </UL>
