@@ -4,46 +4,6 @@
 /* Macro to convert heap 1-index array to C 0-index array */
 #define ZERO_INDEX(x) x-1
 
-/*
-static void heap_up(heap_t *heap) {
-	// Write me!
-	//Start with the least element in the heap
-	//if it's the root element, stop
-	if(((heap->length)-1) != 0){
-		int length = (heap->length)-1;
-		printf("length: %d\r\n",length);
-		int parent_p;
-		int parent;
-		//Compare it with its parent
-		while(1) {
-			if(length % 2 == 0) {
-				//even
-				parent_p = (length-1)/2;
-				parent = heap->store[parent_p];
-			} else {
-				//odd
-				parent_p = (length/2);
-				parent = heap->store[parent_p];
-			}
-			//if the parent is smaller, stop
-			printf("checking %d < %d\r\n",parent,heap->store[length]);
-			if(parent > heap->store[length]){
-				printf("swap\r\n");
-				//swap the element with its parent
-				heap->store[parent_p] = heap->store[length];
-				heap->store[length] = parent;
-				length = parent_p;
-				//with the element in its new location, go back to step 2
-			} else {
-				break;
-			}
-		}
-	} else {
-		printf("First\r\n");
-	}
-}
-*/
-
 static void heap_up(heap_t * heap) {
 	/* Start with last element in heap */
 	int child_index = heap->length;
@@ -71,51 +31,6 @@ static void heap_up(heap_t * heap) {
 	}
 	
 }
-
-
-//static void heap_down(heap_t *heap) {
-//	// Write me!
-//	if((((heap->length)-1) != 0)&&(heap->length > 1)){
-//		int posistion = 0;
-//		int parent = heap->store[posistion];
-//		int child_posistion = 0;
-//		int child;
-//		while(1){
-////			int child_1 = heap->store[(2*posistion)+1];
-////			int child_2 = heap->store[(2*posistion)+2];
-//			int child_1 = heap->store[(2*posistion)];
-//			int child_2 = heap->store[(2*posistion)+1];
-//			if(child_1 != 0){
-//				/* has at least one child */
-//				if(child_2 != 0) {
-//					/*check for second child*/
-//					if(child_2 <= child_1){
-//						/*check for smallest child*/
-//						child = child_2;
-//						child_posistion = (2*posistion)+2;
-//					} else {
-//						child = child_1;
-//						child_posistion = (2*posistion)+1;
-//					}
-//				} else {
-//					/* Only one child*/
-//					child = child_1;
-//					child_posistion = (2*posistion)+1;
-//				}
-//				if(child < parent){
-//						/*swap with smallest child */
-//						heap->store[child_posistion] = parent;
-//						heap->store[posistion] = child;
-//						posistion = child_posistion;
-//					} else {
-//						break;
-//					}
-//			} else {
-//				break;
-//			}
-//		}			
-//	}
-//}
 
 static void heap_down(heap_t * heap) {
 	/* Start with the root element */
