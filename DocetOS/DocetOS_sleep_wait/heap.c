@@ -2,9 +2,8 @@
 #include "os.h"
 #include <stdio.h>
 
-void heap_up(heap_t * heap) {
-	/* Start with last element in heap */
-	int child_index = heap->length;
+void heap_up(heap_t * heap, int start_element) {
+	int child_index = start_element + 1;
 	int parent_index;
 	OS_TCB_t * parent_tcb;
 	OS_TCB_t * child_tcb;
@@ -17,7 +16,16 @@ void heap_up(heap_t * heap) {
 		parent_tcb = heap->TCB[parent_index - 1];
 		child_tcb = heap->TCB[child_index - 1];
 		/* Compare with it's parent */
-		if(parent_tcb->priority_affected < child_tcb->priority_affected) {
+		unsigned int parent_sort, child_sort;
+		if(heap->sort == 0) {
+			parent_sort = parent_tcb->priority_affected;
+			child_sort = child_tcb->priority_affected;
+		} else {
+			parent_sort = parent_tcb->data;
+			child_sort = child_tcb->data;
+		}
+		
+		if(parent_sort < child_sort) {
 			/* If the parent is smaller, stop */
 			break;
 		} else {
@@ -32,9 +40,10 @@ void heap_up(heap_t * heap) {
 	}
 }
 
-void heap_down(heap_t * heap) {
+void heap_down(heap_t * heap, int start_element) {
 	/* Start with the root element */
-	int parent_index = 1;
+	//int parent_index = 1;
+	int parent_index = start_element + 1;
 	while(1) {
 		/* If it has no children, stop */
 		if(heap->length == 1) {
@@ -46,33 +55,53 @@ void heap_down(heap_t * heap) {
 		child2_index = (parent_index * 2) + 1;
 		
 		int smallest_child_index; 
-		OS_TCB_t * smallest_child_TCB;
+		OS_TCB_t * smallest_child_tcb;
 		OS_TCB_t * child1_tcb;
 		OS_TCB_t * child2_tcb;
 		OS_TCB_t * parent_tcb;
+		unsigned int parent_sort, child1_sort, child2_sort, smallest_child_sort;
 		
 		/* Check for child 1 */
 		if(heap->length >= (parent_index * 2)) {
-			smallest_child_TCB = heap->TCB[child1_index - 1];
+			smallest_child_tcb = heap->TCB[child1_index - 1];
 			smallest_child_index = child1_index;
 			
 			/* Check for child 2 */
 			if(heap->length >= ((parent_index * 2) + 1)) {
 				child1_tcb = heap->TCB[child1_index - 1];
 				child2_tcb = heap->TCB[child2_index - 1];
-				if(child1_tcb->priority_affected > child2_tcb->priority_affected) {
+				
+				if(heap->sort == 0) {
+					child1_sort = child1_tcb->priority_affected;
+					child2_sort = child2_tcb->priority_affected;
+				} else {
+					child1_sort = child1_tcb->data;
+					child2_sort = child2_tcb->data;
+				}
+				/* Find the smallest child */
+				if(child1_sort > child2_sort) {
 					/* child1 > child2 */
-					smallest_child_TCB = heap->TCB[child2_index - 1];
+					smallest_child_tcb = heap->TCB[child2_index - 1];
 					smallest_child_index = child2_index;
 				}
 			}
 		}
-		/* Compare with the smallest child */
 		parent_tcb = heap->TCB[parent_index - 1];
-		if(parent_tcb->priority_affected > smallest_child_TCB->priority_affected) {
-			/* Parent is smaller - swap */
+		
+		if(heap->sort == 0) {
+					parent_sort = parent_tcb->priority_affected;
+					smallest_child_sort = smallest_child_tcb->priority_affected;
+				} else {
+					parent_sort = parent_tcb->data;
+					smallest_child_sort = smallest_child_tcb->data;
+				}
+		/* Compare the smallest child with parent */ 
+		if(parent_sort > smallest_child_sort) {
+			/* Parent is bigger - swap */
+			OS_TCB_t * temp = heap->TCB[smallest_child_index - 1];
 			heap->TCB[smallest_child_index - 1] = heap->TCB[parent_index-1];
-			heap->TCB[parent_index - 1] = smallest_child_TCB;
+			heap->TCB[parent_index - 1] = temp;
+			
 			parent_index = smallest_child_index;
 		} else {
 			break;
@@ -80,16 +109,39 @@ void heap_down(heap_t * heap) {
 	}
 }
 
-void heap_init(heap_t *heap, OS_TCB_t ** tcb) {
+void heap_fix(heap_t * heap, int start_element) {
+	int node_index = start_element + 1;
+	if(node_index == 1) {
+		heap_down(heap, start_element);
+	} else {
+		unsigned int parent_sort, child_sort;
+		if(heap->sort == 0) {
+			parent_sort = heap->TCB[node_index]->priority_affected;
+			child_sort = heap->TCB[node_index/2]->priority_affected;
+		} else {
+			parent_sort = heap->TCB[node_index]->data;
+			child_sort = heap->TCB[node_index/2]->data;
+		}
+		
+		if(parent_sort < child_sort) {
+			heap_up(heap, start_element);
+		} else {
+			heap_down(heap, start_element);
+		}
+	}
+}
+
+void heap_init(heap_t *heap, OS_TCB_t ** tcb, unsigned int sort) {
 	heap->TCB = tcb;
 	heap->length = 0;
+	heap->sort = sort;
 }
 
 void heap_insert(heap_t *heap, OS_TCB_t * tcb) {
 	// The new element is always added to the end of a heap
 	//printf("adding %d\r\n", value);
 	heap->TCB[(heap->length)++] = tcb;
-	heap_up(heap);
+	heap_up(heap, (heap->length - 1));
 }
 
 OS_TCB_t * heap_extract(heap_t *heap) {
@@ -98,7 +150,7 @@ OS_TCB_t * heap_extract(heap_t *heap) {
 	OS_TCB_t * value = heap->TCB[0];
 	heap->TCB[0] = heap->TCB[--(heap->length)];
 	//heap->store[(heap->length)] = 0;
-	heap_down(heap);
+	heap_down(heap, 0);
 	return value;
 }
 

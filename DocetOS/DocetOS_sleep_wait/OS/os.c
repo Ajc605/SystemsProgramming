@@ -3,6 +3,7 @@
 #include "stm32f4xx.h"
 #include <stdlib.h>
 #include <string.h>
+extern void scheduler_init(void);
 
 __align(8)
 /* Idle task stack frame area and TCB.  The TCB is not declared const, to ensure that it is placed in writable
@@ -63,6 +64,7 @@ void OS_init(OS_Scheduler_t const * scheduler) {
 	ASSERT(_scheduler->taskexit_callback);
 	ASSERT(_scheduler->wait_callback);
 	ASSERT(_scheduler->notify_callback);
+	scheduler_init();
 }
 
 /* Starts the OS and never returns. */

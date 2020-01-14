@@ -4,9 +4,9 @@
 /* Macro to convert heap 1-index array to C 0-index array */
 #define ZERO_INDEX(x) x-1
 
-static void heap_up(heap_t * heap) {
+static void heap_up(heap_t * heap, unsigned int start_element) {
 	/* Start with last element in heap */
-	int child_index = heap->length;
+	int child_index = start_element+1;
 	int parent_index;
 	while(1) {
 		/* If it's the root element, stop */
@@ -32,9 +32,9 @@ static void heap_up(heap_t * heap) {
 	
 }
 
-static void heap_down(heap_t * heap) {
+static void heap_down(heap_t * heap, unsigned int start_element) {
 	/* Start with the root element */
-	int parent_index = 1;
+	int parent_index = start_element+1;
 	while(1) {
 		/* If it has no children, stop */
 		if(heap->length == 1) {
@@ -75,6 +75,19 @@ static void heap_down(heap_t * heap) {
 	}
 }
 
+void heap_fix(heap_t * heap, unsigned int start_element) {
+	int node_index = start_element + 1;
+	if(node_index == 1) {
+		return;
+	} else {
+		if(heap->store[ZERO_INDEX(node_index)] < heap->store[ZERO_INDEX(node_index/2)]) {
+			heap_up(heap, start_element);
+		} else {
+			heap_down(heap, start_element);
+		}
+	}
+}
+
 void heap_init(heap_t *heap, int *store) {
 	heap->store = store;
 	heap->length = 0;
@@ -84,7 +97,7 @@ void heap_insert(heap_t *heap, int value) {
 	// The new element is always added to the end of a heap
 	printf("adding %d\r\n", value);
 	heap->store[(heap->length)++] = value;
-	heap_up(heap);
+	heap_up(heap, heap->length-1);
 }
 
 int heap_extract(heap_t *heap) {
@@ -93,7 +106,7 @@ int heap_extract(heap_t *heap) {
 	int value = heap->store[0];
 	heap->store[0] = heap->store[--(heap->length)];
 	//heap->store[(heap->length)] = 0;
-	heap_down(heap);
+	heap_down(heap, 0);
 	return value;
 }
 

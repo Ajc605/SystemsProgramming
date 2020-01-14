@@ -44,10 +44,18 @@ printf("\r\n\r\n");
 	
 	printf("heap: ");
 	for(int i=0; i <= heap.length-1;i++){
-		printf("%d",heap.store[i]);
+		printf("%d ",heap.store[i]);
 	}
 	printf("\r\n");
 	
+	heap.store[1] = 15;
+	heap_fix(&heap, 1);
+	
+	printf("heap: ");
+	for(int i=0; i <= heap.length-1;i++){
+		printf("%d ",heap.store[i]);
+	}
+	printf("\r\n");
 	
 	while (!heap_isEmpty(&heap)) {
 		printf("Extracted %d\r\n", heap_extract(&heap));
