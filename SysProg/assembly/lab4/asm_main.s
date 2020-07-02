@@ -8,7 +8,16 @@ array_end
 	EXPORT asm_main
 asm_main
 	; Your code goes here
-
+	LDR r0, =array
+	LDR r1, =array_end
+	MOV r2, #0
+	MOV r3, #0
+	
+loop
+	LDR r2, [r0], #4
+	ADD r3, r3, r2
+	CMP r0, r1
+	BLO loop
 	B .			; Loop forever
 
 	ALIGN
