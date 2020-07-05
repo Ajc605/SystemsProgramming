@@ -2,9 +2,13 @@
 
 void push(int **sp, int value) {
 	/* Finish this! */
+	**sp = value;
+	*sp = *sp + 1;
 }
 
 int pop(int **sp) {
 	/* Finish this! */
-	return 0;
+	*sp = *sp - 1;
+	int value = **sp;
+	return value;
 }

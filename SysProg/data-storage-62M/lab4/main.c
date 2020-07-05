@@ -31,6 +31,8 @@ int main(void) {
 	heap_insert(&heap, 6);
 	heap_insert(&heap, 1);
 	
+	printf("\r\n\r\n");
+	
 	while (!heap_isEmpty(&heap)) {
 		printf("Extracted %d\r\n", heap_extract(&heap));
 	}

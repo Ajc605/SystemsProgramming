@@ -6,16 +6,36 @@ ARM Macro Assembler    Page 1
 
     1 00000000                 AREA             asm,CODE
     2 00000000         
-    3 00000000         ; Your code goes here
-    4 00000000         
-    5 00000000                 END
-Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
-erwork --depend=.\flash\asm.d -o.\flash\asm.o -IC:\Users\ajp109\Dropbox\ARM\uV5
-\SysProg\interwork\lab2\RTE -IC:\Keil_v5\ARM\PACK\ARM\CMSIS\4.5.0\CMSIS\Include
- -IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.10.0\Drivers\CMSIS\Device\ST\STM32F
-4xx\Include --predefine="__EVAL SETA 1" --predefine="__UVISION_VERSION SETA 521
-" --predefine="_RTE_ SETA 1" --predefine="STM32F407xx SETA 1" --list=.\flash\as
-m.lst asm.s
+    3 00000000                 EXPORT           fib
+    4 00000000                 IMPORT           report
+    5 00000000         
+    6 00000000         fib
+    7 00000000 B570            STMFD            sp!, {r4, r5, r6, lr} ; //Pushi
+                                                            ng registers
+    8 00000002 4604            MOV              r4, r0      ; Store n
+    9 00000004 F04F 0500       MOV              r5, #0
+   10 00000008 F04F 0601       MOV              r6, #1
+   11 0000000C         
+   12 0000000C         loop
+   13 0000000C EB05 0006       ADD              r0, r5, r6
+   14 00000010 4635            MOV              r5, r6
+   15 00000012 4606            MOV              r6, r0
+   16 00000014 F7FF FFFE       BL               report      ; Print the value i
+                                                            n r0
+   17 00000018 3C01            SUBS             r4, #1
+   18 0000001A D1F7            BNE              loop
+   19 0000001C         
+   20 0000001C BD70            LDMFD            sp!, {r4, r5, r6, pc} 
+                                                            ; Poping registers
+   21 0000001E         
+   22 0000001E                 END
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp.sp --apcs=
+interwork --depend=.\flash\asm.d -o.\flash\asm.o -I.\RTE\_STM32F407_Flash -IC:\
+Users\aiden\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include -IC:\Use
+rs\aiden\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device
+\ST\STM32F4xx\Include --predefine="__EVAL SETA 1" --predefine="__UVISION_VERSIO
+N SETA 530" --predefine="_RTE_ SETA 1" --predefine="STM32F407xx SETA 1" --prede
+fine="_RTE_ SETA 1" --list=.\flash\asm.lst asm.s
 
 
 
@@ -30,5 +50,36 @@ Symbol: asm
    Uses
       None
 Comment: asm unused
+fib 00000000
+
+Symbol: fib
+   Definitions
+      At line 6 in file asm.s
+   Uses
+      At line 3 in file asm.s
+Comment: fib used once
+loop 0000000C
+
+Symbol: loop
+   Definitions
+      At line 12 in file asm.s
+   Uses
+      At line 18 in file asm.s
+Comment: loop used once
+3 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+External symbols
+
+report 00000000
+
+Symbol: report
+   Definitions
+      At line 4 in file asm.s
+   Uses
+      At line 16 in file asm.s
+Comment: report used once
 1 symbol
-335 symbols in table
+339 symbols in table
