@@ -13,7 +13,8 @@ enum OS_SVC_e {
 	OS_SVC_ADD_TASK,
 	OS_SVC_EXIT,
 	OS_SVC_YIELD,
-	OS_SVC_SCHEDULE
+	OS_SVC_SCHEDULE,
+	SVC_REPORT
 };
 
 /* A structure to hold callbacks for a scheduler, plus a 'preemptive' flag */
@@ -63,7 +64,6 @@ void __svc(OS_SVC_ADD_TASK) OS_addTask(OS_TCB_t const * const);
 
 /************************/
 /* Scheduling functions */
-/************************/
 
 /* SVC delegate to yield the current task */
 void __svc(OS_SVC_YIELD) OS_yield(void);

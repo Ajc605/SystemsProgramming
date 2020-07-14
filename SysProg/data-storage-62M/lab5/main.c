@@ -14,12 +14,22 @@ typedef struct {
 int main(void) {
 	serial_init();
 	
+	//int x = 2;
+	//void *y = &x;
+	//void **z = &y;
+	
+	//int a = (int)z;
+	
+	
+	
+	
 	/* Declare and intialise a memory pool */
 	static pool_t pool;
 	static packet_t poolElements[10];
 	pool_init(&pool);
 	for (int i = 0; i < 10; ++i) {
-		pool_add(&pool, &poolElements[i]);
+		void *prt = &poolElements[i];
+		pool_add(&pool, prt);
 	}
 	
 	/* Example use of the pool */
