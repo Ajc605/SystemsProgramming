@@ -1,4 +1,6 @@
 #include "simpleRoundRobin.h"
+#include <stdio.h>
+#include <stm32f4xx.h>
 
 /* This is an implementation of an extremely simple (and inefficient!) round-robin scheduler.
 
@@ -16,6 +18,8 @@
 static OS_TCB_t const * simpleRoundRobin_scheduler(void);
 static void simpleRoundRobin_addTask(OS_TCB_t * const tcb);
 static void simpleRoundRobin_taskExit(OS_TCB_t * const tcb);
+static void simpleRoundRobin_wait(void * const reason);
+static void simpleRoundRobin_notify(void * const reason);
 
 static OS_TCB_t * tasks[SIMPLE_RR_MAX_TASKS] = {0};
 
@@ -24,7 +28,9 @@ OS_Scheduler_t const simpleRoundRobinScheduler = {
 	.preemptive = 1,
 	.scheduler_callback = simpleRoundRobin_scheduler,
 	.addtask_callback = simpleRoundRobin_addTask,
-	.taskexit_callback = simpleRoundRobin_taskExit
+	.taskexit_callback = simpleRoundRobin_taskExit,
+	.wait_callback = simpleRoundRobin_wait,
+	.notify_callback = simpleRoundRobin_notify
 };
 
 
@@ -36,7 +42,17 @@ static OS_TCB_t const * simpleRoundRobin_scheduler(void) {
 	for (int j = 1; j <= SIMPLE_RR_MAX_TASKS; j++) {
 		i = (i + 1) % SIMPLE_RR_MAX_TASKS;
 		if (tasks[i] != 0) {
-			return tasks[i];
+			/* Check sleep bit */
+			if(tasks[i]->state & TASK_STATE_SLEEP) {
+				/* Check if enough time has past */
+				if(OS_elapsedTicks() >= tasks[i]->data){
+					return tasks[i];
+				}
+			} else {
+				/* Clear sleep bit */
+				tasks[i]->state &= ~TASK_STATE_SLEEP;
+				return tasks[i];
+			}
 		}
 	}
 	// No tasks in the list, so return the idle task
@@ -62,4 +78,24 @@ static void simpleRoundRobin_taskExit(OS_TCB_t * const tcb) {
 			tasks[i] = 0;
 		}
 	}	
+}
+
+static void simpleRoundRobin_wait(void * const reason) {
+	OS_TCB_t *cur_TCB = OS_currentTCB();
+	cur_TCB->data = (unsigned)reason;
+	cur_TCB->state |= TASK_STATE_WAIT;
+	SCB->ICSR = SCB_ICSR_PENDSVSET_Msk;
+}
+static void simpleRoundRobin_notify( void * const reason){
+	static int i = 0;
+	for (int j = 1; j <= SIMPLE_RR_MAX_TASKS; j++) {
+		i = (i + 1) % SIMPLE_RR_MAX_TASKS;
+		if (tasks[i] != 0) {
+			/* Check wait bit and reason for waiting*/
+			if((tasks[i]->state & TASK_STATE_WAIT) && (tasks[i]->data == (unsigned)reason)) {
+				tasks[i]->state &= ~TASK_STATE_WAIT;
+				tasks[i]->data = 0;
+			}
+		}
+	}
 }

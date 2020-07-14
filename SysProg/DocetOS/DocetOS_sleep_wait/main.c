@@ -2,15 +2,23 @@
 #include <stdio.h>
 #include "utils/serial.h"
 #include "simpleRoundRobin.h"
+#include "sleep.h"
+#include "mutex.h"
+
+static OS_mutex_t mutex;
 
 void task1(void const *const args) {
 	while (1) {
+		OS_mutex_acquire(&mutex);
 		printf("Message from Task 1\r\n");
+		OS_mutex_release(&mutex);
 	}
 }
 void task2(void const *const args) {
 	while (1) {
+		OS_mutex_acquire(&mutex);
 		printf("Message from Task 2\r\n");
+		OS_mutex_release(&mutex);
 	}
 }
 
@@ -19,6 +27,9 @@ void task2(void const *const args) {
 int main(void) {
 	/* Initialise the serial port so printf() works */
 	serial_init();
+	
+	
+	init_mutex(&mutex);
 
 	printf("\r\nDocetOS Sleep and Mutex\r\n");
 

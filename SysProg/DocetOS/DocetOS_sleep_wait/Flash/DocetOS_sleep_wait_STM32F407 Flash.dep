@@ -1,0 +1,120 @@
+Dependencies for Project 'DocetOS_sleep_wait', Target 'STM32F407 Flash': (DO NOT MODIFY !)
+CompilerVersion: 5060750::V5.06 update 6 (build 750)::.\ARMCC
+F (.\utils\retarget.c)(0x5EE3E7A5)(--c99 -c --cpu Cortex-M4.fp.sp -D__EVAL -g -O0 --apcs=interwork -I .\OS --c99-I.\RTE\_STM32F407_Flash-IC:\Users\aiden\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\aiden\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F407xx -D_RTE_ -DSTM32F407xx -DSTM32F4XX -DHSE_VALUE="8000000" -DPLL_M="8" -DPLL_N="336" -DPLL_P="2" -DPLL_Q="7"-o .\flash\retarget.o --omf_browse .\flash\retarget.crf --depend .\flash\retarget.d)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5E54234C)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h)(0x5C5C6312)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f407xx.h)(0x5C5C6312)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\core_cm4.h)(0x5E8FA412)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E54234C)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_version.h)(0x5E8FA412)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_compiler.h)(0x5E83D9B2)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_armcc.h)(0x5E8FA412)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\mpu_armv7.h)(0x5E8FA412)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h)(0x5C5C6312)
+F (.\utils\serial.c)(0x5EE3E7A5)(--c99 -c --cpu Cortex-M4.fp.sp -D__EVAL -g -O0 --apcs=interwork -I .\OS --c99-I.\RTE\_STM32F407_Flash-IC:\Users\aiden\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\aiden\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F407xx -D_RTE_ -DSTM32F407xx -DSTM32F4XX -DHSE_VALUE="8000000" -DPLL_M="8" -DPLL_N="336" -DPLL_P="2" -DPLL_Q="7"-o .\flash\serial.o --omf_browse .\flash\serial.crf --depend .\flash\serial.d)
+I (utils\serial.h)(0x5EE3E7A5)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h)(0x5C5C6312)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f407xx.h)(0x5C5C6312)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\core_cm4.h)(0x5E8FA412)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E54234C)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_version.h)(0x5E8FA412)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_compiler.h)(0x5E83D9B2)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_armcc.h)(0x5E8FA412)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\mpu_armv7.h)(0x5E8FA412)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h)(0x5C5C6312)
+F (.\main.c)(0x5F0D9EBB)(--c99 -c --cpu Cortex-M4.fp.sp -D__EVAL -g -O0 --apcs=interwork -I .\OS --c99-I.\RTE\_STM32F407_Flash-IC:\Users\aiden\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\aiden\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F407xx -D_RTE_ -DSTM32F407xx -DSTM32F4XX -DHSE_VALUE="8000000" -DPLL_M="8" -DPLL_N="336" -DPLL_P="2" -DPLL_Q="7"-o .\flash\main.o --omf_browse .\flash\main.crf --depend .\flash\main.d)
+I (.\OS\os.h)(0x5F0DA3DC)
+I (.\OS\task.h)(0x5F0D9EBB)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E54234C)
+I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5E54234C)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5E54234C)
+I (utils/serial.h)(0x5EE3E7A5)
+I (simpleRoundRobin.h)(0x5EE3E7A5)
+I (sleep.h)(0x5F0D7D12)
+I (mutex.h)(0x5F0D9EBC)
+I (.\OS\OS_internal.h)(0x5EE3E7A5)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h)(0x5C5C6312)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f407xx.h)(0x5C5C6312)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\core_cm4.h)(0x5E8FA412)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_version.h)(0x5E8FA412)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_compiler.h)(0x5E83D9B2)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_armcc.h)(0x5E8FA412)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\mpu_armv7.h)(0x5E8FA412)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h)(0x5C5C6312)
+F (.\simpleRoundRobin.c)(0x5F0D9EBC)(--c99 -c --cpu Cortex-M4.fp.sp -D__EVAL -g -O0 --apcs=interwork -I .\OS --c99-I.\RTE\_STM32F407_Flash-IC:\Users\aiden\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\aiden\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F407xx -D_RTE_ -DSTM32F407xx -DSTM32F4XX -DHSE_VALUE="8000000" -DPLL_M="8" -DPLL_N="336" -DPLL_P="2" -DPLL_Q="7"-o .\flash\simpleroundrobin.o --omf_browse .\flash\simpleroundrobin.crf --depend .\flash\simpleroundrobin.d)
+I (simpleRoundRobin.h)(0x5EE3E7A5)
+I (.\OS\os.h)(0x5F0DA3DC)
+I (.\OS\task.h)(0x5F0D9EBB)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E54234C)
+I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5E54234C)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5E54234C)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h)(0x5C5C6312)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f407xx.h)(0x5C5C6312)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\core_cm4.h)(0x5E8FA412)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_version.h)(0x5E8FA412)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_compiler.h)(0x5E83D9B2)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_armcc.h)(0x5E8FA412)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\mpu_armv7.h)(0x5E8FA412)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h)(0x5C5C6312)
+F (.\OS\os_asm.s)(0x5EE3E7A5)(--cpu Cortex-M4.fp.sp --pd "__EVAL SETA 1" -g --apcs=interwork -I.\RTE\_STM32F407_Flash-IC:\Users\aiden\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\aiden\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include--pd "__UVISION_VERSION SETA 530" --pd "_RTE_ SETA 1" --pd "STM32F407xx SETA 1" --pd "_RTE_ SETA 1"--list .\flash\os_asm.lst --xref -o .\flash\os_asm.o --depend .\flash\os_asm.d)
+F (.\OS\os.c)(0x5F0DA37D)(--c99 -c --cpu Cortex-M4.fp.sp -D__EVAL -g -O0 --apcs=interwork -I .\OS --c99-I.\RTE\_STM32F407_Flash-IC:\Users\aiden\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\aiden\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F407xx -D_RTE_ -DSTM32F407xx -DSTM32F4XX -DHSE_VALUE="8000000" -DPLL_M="8" -DPLL_N="336" -DPLL_P="2" -DPLL_Q="7"-o .\flash\os.o --omf_browse .\flash\os.crf --depend .\flash\os.d)
+I (OS\os.h)(0x5F0DA3DC)
+I (OS\task.h)(0x5F0D9EBB)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E54234C)
+I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5E54234C)
+I (OS\os_internal.h)(0x5EE3E7A5)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h)(0x5C5C6312)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f407xx.h)(0x5C5C6312)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\core_cm4.h)(0x5E8FA412)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_version.h)(0x5E8FA412)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_compiler.h)(0x5E83D9B2)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_armcc.h)(0x5E8FA412)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\mpu_armv7.h)(0x5E8FA412)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h)(0x5C5C6312)
+I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5E54234C)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5E54234C)
+F (.\sleep.c)(0x5F0DA3DC)(--c99 -c --cpu Cortex-M4.fp.sp -D__EVAL -g -O0 --apcs=interwork -I .\OS --c99-I.\RTE\_STM32F407_Flash-IC:\Users\aiden\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\aiden\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F407xx -D_RTE_ -DSTM32F407xx -DSTM32F4XX -DHSE_VALUE="8000000" -DPLL_M="8" -DPLL_N="336" -DPLL_P="2" -DPLL_Q="7"-o .\flash\sleep.o --omf_browse .\flash\sleep.crf --depend .\flash\sleep.d)
+I (sleep.h)(0x5F0D7D12)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E54234C)
+I (.\OS\os_internal.h)(0x5EE3E7A5)
+I (.\OS\os.h)(0x5F0DA3DC)
+I (.\OS\task.h)(0x5F0D9EBB)
+I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5E54234C)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h)(0x5C5C6312)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f407xx.h)(0x5C5C6312)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\core_cm4.h)(0x5E8FA412)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_version.h)(0x5E8FA412)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_compiler.h)(0x5E83D9B2)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_armcc.h)(0x5E8FA412)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\mpu_armv7.h)(0x5E8FA412)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h)(0x5C5C6312)
+F (.\sleep.h)(0x5F0D7D12)()
+F (.\utils\hardfault.c)(0x5EE3E7A5)(--c99 -c --cpu Cortex-M4.fp.sp -D__EVAL -g -O0 --apcs=interwork -I .\OS --c99-I.\RTE\_STM32F407_Flash-IC:\Users\aiden\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\aiden\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F407xx -D_RTE_ -DSTM32F407xx -DSTM32F4XX -DHSE_VALUE="8000000" -DPLL_M="8" -DPLL_N="336" -DPLL_P="2" -DPLL_Q="7"-o .\flash\hardfault.o --omf_browse .\flash\hardfault.crf --depend .\flash\hardfault.d)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E54234C)
+F (.\mutex.h)(0x5F0D9EBC)()
+F (.\mutex.c)(0x5F0DA3DC)(--c99 -c --cpu Cortex-M4.fp.sp -D__EVAL -g -O0 --apcs=interwork -I .\OS --c99-I.\RTE\_STM32F407_Flash-IC:\Users\aiden\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\aiden\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F407xx -D_RTE_ -DSTM32F407xx -DSTM32F4XX -DHSE_VALUE="8000000" -DPLL_M="8" -DPLL_N="336" -DPLL_P="2" -DPLL_Q="7"-o .\flash\mutex.o --omf_browse .\flash\mutex.crf --depend .\flash\mutex.d)
+I (mutex.h)(0x5F0D9EBC)
+I (.\OS\OS_internal.h)(0x5EE3E7A5)
+I (.\OS\os.h)(0x5F0DA3DC)
+I (.\OS\task.h)(0x5F0D9EBB)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E54234C)
+I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5E54234C)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h)(0x5C5C6312)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f407xx.h)(0x5C5C6312)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\core_cm4.h)(0x5E8FA412)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_version.h)(0x5E8FA412)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_compiler.h)(0x5E83D9B2)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_armcc.h)(0x5E8FA412)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\mpu_armv7.h)(0x5E8FA412)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h)(0x5C5C6312)
+F (RTE\Device\STM32F407VG\startup_stm32f407xx.s)(0x5EE3E7A5)(--cpu Cortex-M4.fp.sp --pd "__EVAL SETA 1" -g --apcs=interwork -I.\RTE\_STM32F407_Flash-IC:\Users\aiden\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\aiden\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include--pd "__UVISION_VERSION SETA 530" --pd "_RTE_ SETA 1" --pd "STM32F407xx SETA 1" --pd "_RTE_ SETA 1"--list .\flash\startup_stm32f407xx.lst --xref -o .\flash\startup_stm32f407xx.o --depend .\flash\startup_stm32f407xx.d)
+F (RTE\Device\STM32F407VG\system_stm32f4xx.c)(0x5EE3E7A5)(--c99 -c --cpu Cortex-M4.fp.sp -D__EVAL -g -O0 --apcs=interwork -I .\OS --c99-I.\RTE\_STM32F407_Flash-IC:\Users\aiden\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\aiden\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F407xx -D_RTE_ -DSTM32F407xx -DSTM32F4XX -DHSE_VALUE="8000000" -DPLL_M="8" -DPLL_N="336" -DPLL_P="2" -DPLL_Q="7"-o .\flash\system_stm32f4xx.o --omf_browse .\flash\system_stm32f4xx.crf --depend .\flash\system_stm32f4xx.d)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h)(0x5C5C6312)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f407xx.h)(0x5C5C6312)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\core_cm4.h)(0x5E8FA412)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E54234C)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_version.h)(0x5E8FA412)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_compiler.h)(0x5E83D9B2)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_armcc.h)(0x5E8FA412)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\mpu_armv7.h)(0x5E8FA412)
+I (C:\Users\aiden\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h)(0x5C5C6312)

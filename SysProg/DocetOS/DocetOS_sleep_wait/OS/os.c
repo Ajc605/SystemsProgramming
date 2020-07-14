@@ -5,6 +5,8 @@
 #include <string.h>
 
 __align(8)
+
+static uint32_t checkValue = 0;
 /* Idle task stack frame area and TCB.  The TCB is not declared const, to ensure that it is placed in writable
    memory by the compiler.  The pointer to the TCB _is_ declared const, as it is visible externally - but it will
    still be writable by the assembly-language context switch. */
@@ -56,6 +58,8 @@ void OS_init(OS_Scheduler_t const * scheduler) {
 	ASSERT(_scheduler->scheduler_callback);
 	ASSERT(_scheduler->addtask_callback);
 	ASSERT(_scheduler->taskexit_callback);
+	ASSERT(_scheduler->wait_callback);
+	ASSERT(_scheduler->notify_callback);
 }
 
 /* Starts the OS and never returns. */
@@ -121,3 +125,17 @@ void _svc_OS_task_exit(void) {
 	SCB->ICSR = SCB_ICSR_PENDSVSET_Msk;
 }
 
+void _svc_OS_wait(void * reason, uint32_t checkSum) {
+	if(checkValue == checkSum) {
+		_scheduler->wait_callback(reason, checkSum);
+	}
+}
+
+void _svc_OS_notify(void * reason) {
+	checkValue++;
+	_scheduler->notify_callback(reason);
+}
+
+uint32_t getCheckSum(void) {
+	return checkValue;
+}
