@@ -12,13 +12,16 @@ void task1(void const *const args) {
 		OS_mutex_acquire(&mutex);
 		printf("Message from Task 1\r\n");
 		OS_mutex_release(&mutex);
+		OS_sleep(1);
 	}
 }
+
 void task2(void const *const args) {
 	while (1) {
 		OS_mutex_acquire(&mutex);
 		printf("Message from Task 2\r\n");
 		OS_mutex_release(&mutex);
+		OS_sleep(1);
 	}
 }
 
@@ -27,7 +30,6 @@ void task2(void const *const args) {
 int main(void) {
 	/* Initialise the serial port so printf() works */
 	serial_init();
-	
 	
 	init_mutex(&mutex);
 

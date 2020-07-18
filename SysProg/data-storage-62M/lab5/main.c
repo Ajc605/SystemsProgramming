@@ -14,11 +14,11 @@ typedef struct {
 int main(void) {
 	serial_init();
 	
-	//int x = 2;
-	//void *y = &x;
-	//void **z = &y;
+	int x = 2;
+	void *y = &x;
+	void **z = &y;
 	
-	//int a = (int)z;
+	int a = (int)z;
 	
 	
 	

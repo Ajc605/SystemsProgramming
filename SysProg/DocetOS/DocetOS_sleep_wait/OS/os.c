@@ -6,7 +6,6 @@
 
 __align(8)
 
-static uint32_t checkValue = 0;
 /* Idle task stack frame area and TCB.  The TCB is not declared const, to ensure that it is placed in writable
    memory by the compiler.  The pointer to the TCB _is_ declared const, as it is visible externally - but it will
    still be writable by the assembly-language context switch. */
@@ -16,6 +15,8 @@ OS_TCB_t const * const OS_idleTCB_p = &OS_idleTCB;
 
 /* Total elapsed ticks */
 static volatile uint32_t _ticks = 0;
+/* check sum value */
+static volatile uint32_t checkValue = 0;
 
 /* Pointer to the 'scheduler' struct containing callback pointers */
 static OS_Scheduler_t const * _scheduler = 0;
@@ -124,18 +125,18 @@ void _svc_OS_task_exit(void) {
 	_scheduler->taskexit_callback(_currentTCB);
 	SCB->ICSR = SCB_ICSR_PENDSVSET_Msk;
 }
-
+/* SVC handler that calls OS_wait when the mutex is already in use. */
 void _svc_OS_wait(void * reason, uint32_t checkSum) {
-	if(checkValue == checkSum) {
-		_scheduler->wait_callback(reason, checkSum);
-	}
+		_scheduler->wait_callback((OS_TCB_t *)reason,(uint32_t )((uint32_t *)reason + 1));
 }
 
+/* SVC handler that calls OS_notify when the current task in the mutex is relased. */
 void _svc_OS_notify(void * reason) {
 	checkValue++;
-	_scheduler->notify_callback(reason);
+	_scheduler->notify_callback((OS_TCB_t *)reason);
 }
 
+/* Returns the checksum value */
 uint32_t getCheckSum(void) {
 	return checkValue;
 }

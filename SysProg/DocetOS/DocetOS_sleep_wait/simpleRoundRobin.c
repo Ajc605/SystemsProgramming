@@ -18,7 +18,7 @@
 static OS_TCB_t const * simpleRoundRobin_scheduler(void);
 static void simpleRoundRobin_addTask(OS_TCB_t * const tcb);
 static void simpleRoundRobin_taskExit(OS_TCB_t * const tcb);
-static void simpleRoundRobin_wait(void * const reason);
+static void simpleRoundRobin_wait(void * const reason, uint32_t checkSum);
 static void simpleRoundRobin_notify(void * const reason);
 
 static OS_TCB_t * tasks[SIMPLE_RR_MAX_TASKS] = {0};
@@ -46,12 +46,14 @@ static OS_TCB_t const * simpleRoundRobin_scheduler(void) {
 			if(tasks[i]->state & TASK_STATE_SLEEP) {
 				/* Check if enough time has past */
 				if(OS_elapsedTicks() >= tasks[i]->data){
+					/* Clear sleep bit */
+				tasks[i]->state &= ~TASK_STATE_SLEEP;
 					return tasks[i];
 				}
 			} else {
-				/* Clear sleep bit */
-				tasks[i]->state &= ~TASK_STATE_SLEEP;
-				return tasks[i];
+				if(!(tasks[i]->state & TASK_STATE_WAIT)) {
+					return tasks[i];
+				}
 			}
 		}
 	}
@@ -80,21 +82,35 @@ static void simpleRoundRobin_taskExit(OS_TCB_t * const tcb) {
 	}	
 }
 
-static void simpleRoundRobin_wait(void * const reason) {
-	OS_TCB_t *cur_TCB = OS_currentTCB();
-	cur_TCB->data = (unsigned)reason;
-	cur_TCB->state |= TASK_STATE_WAIT;
-	SCB->ICSR = SCB_ICSR_PENDSVSET_Msk;
+/* 'wait' callback 
+		Set the TCB to a waiting state and set the reason to the address of the mutex it is waiting for.*/
+static void simpleRoundRobin_wait(void * const reason, uint32_t checkSum) {
+	/* Check if an ISR has happend been calling this function and completeing it. */
+	if(checkSum == getCheckSum()) {
+		OS_TCB_t *cur_TCB = OS_currentTCB();
+		uint32_t *data = reason;
+		cur_TCB->data = *data;
+		cur_TCB->state |= TASK_STATE_WAIT;
+		SCB->ICSR = SCB_ICSR_PENDSVSET_Msk;
+	}
 }
+
+/* 'notify' callback 		
+		Check all elemenets in the RR array if they are waiting to the mutex that as just been relases*/
 static void simpleRoundRobin_notify( void * const reason){
+	__CLREX();
 	static int i = 0;
+	uint32_t *data = reason;
+	/* Loop through the array of tasks */
 	for (int j = 1; j <= SIMPLE_RR_MAX_TASKS; j++) {
 		i = (i + 1) % SIMPLE_RR_MAX_TASKS;
 		if (tasks[i] != 0) {
 			/* Check wait bit and reason for waiting*/
-			if((tasks[i]->state & TASK_STATE_WAIT) && (tasks[i]->data == (unsigned)reason)) {
+			if((tasks[i]->state & TASK_STATE_WAIT)) { 
+				if (tasks[i]->data == *data) { 
 				tasks[i]->state &= ~TASK_STATE_WAIT;
 				tasks[i]->data = 0;
+				}
 			}
 		}
 	}

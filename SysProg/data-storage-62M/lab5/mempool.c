@@ -9,7 +9,7 @@ void pool_init(pool_t *pool) {
 void *pool_allocate(pool_t *pool) {
     // Return the head of the list of blocks
     // Update the head pointer
-	void *prt = pool->head;
+	void *prt = &(*pool->head);
 	
 	int *x = (int*)pool->head;
 	
@@ -22,13 +22,13 @@ void pool_deallocate(pool_t *pool, void *item) {
     // Add the new item to the head of the list
 	
 		/* Stores the address of the head into item */
-		void *prt = item;
-		void *head = pool->head;
-		
-		item = head;
+		void * prt = item;
+		void * head = &(*pool->head);
+
+		item = (void *)&(*pool->head);
+		pool->head = prt; 
 	
-		//void *prtHead = pool->head;
+	//void *prtHead = pool->head;
 		//*item = prtHead;
 		/* update head to point to new item */
-		pool->head = prt; 
 }
