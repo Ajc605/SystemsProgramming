@@ -18,7 +18,7 @@
 static OS_TCB_t const * simpleRoundRobin_scheduler(void);
 static void simpleRoundRobin_addTask(OS_TCB_t * const tcb);
 static void simpleRoundRobin_taskExit(OS_TCB_t * const tcb);
-static void simpleRoundRobin_wait(void * const reason, uint32_t checkSum);
+static void roundRobin_wait(void * const reason, uint32_t checkSum);
 static void simpleRoundRobin_notify(void * const reason);
 
 static OS_TCB_t * tasks[SIMPLE_RR_MAX_TASKS] = {0};
@@ -29,7 +29,7 @@ OS_Scheduler_t const simpleRoundRobinScheduler = {
 	.scheduler_callback = simpleRoundRobin_scheduler,
 	.addtask_callback = simpleRoundRobin_addTask,
 	.taskexit_callback = simpleRoundRobin_taskExit,
-	.wait_callback = simpleRoundRobin_wait,
+	.wait_callback = roundRobin_wait,
 	.notify_callback = simpleRoundRobin_notify
 };
 
@@ -84,7 +84,7 @@ static void simpleRoundRobin_taskExit(OS_TCB_t * const tcb) {
 
 /* 'wait' callback 
 		Set the TCB to a waiting state and set the reason to the address of the mutex it is waiting for.*/
-static void simpleRoundRobin_wait(void * const reason, uint32_t checkSum) {
+static void roundRobin_wait(void * const reason, uint32_t checkSum) {
 	/* Check if an ISR has happend been calling this function and completeing it. */
 	if(checkSum == getCheckSum()) {
 		OS_TCB_t *cur_TCB = OS_currentTCB();

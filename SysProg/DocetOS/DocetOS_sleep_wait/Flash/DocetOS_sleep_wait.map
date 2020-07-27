@@ -336,7 +336,7 @@ Image Symbol Table
     simpleRoundRobin_scheduler               0x08000435   Thumb Code   176  simpleroundrobin.o(.text)
     simpleRoundRobin_addTask                 0x080004e5   Thumb Code    32  simpleroundrobin.o(.text)
     simpleRoundRobin_taskExit                0x08000505   Thumb Code    32  simpleroundrobin.o(.text)
-    simpleRoundRobin_wait                    0x08000525   Thumb Code    50  simpleroundrobin.o(.text)
+    roundRobin_wait                          0x08000525   Thumb Code    50  simpleroundrobin.o(.text)
     simpleRoundRobin_notify                  0x08000557   Thumb Code   132  simpleroundrobin.o(.text)
     .text                                    0x080005f0   Section        0  os.o(.text)
     __NVIC_SetPriority                       0x080005f1   Thumb Code    32  os.o(.text)
@@ -762,20 +762,20 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-       110          6          0          0          0       1617   hardfault.o
-       224        100          0          8        544       2878   main.o
-       104          0          0          0          0       1435   mutex.o
-       500         34          4         32         64      36351   os.o
-       148         40          0          0          0        296   os_asm.o
-        64          4          0          4          0     567101   retarget.o
-       216         24          0         40          0        790   serial.o
-       444         22         24          8         32       2452   simpleroundrobin.o
-        30          0          0          0          0        815   sleep.o
-        64         26        392          0       1536        884   startup_stm32f407xx.o
-       532         44         16          4          0       2087   system_stm32f4xx.o
+       110          6          0          0          0       1641   hardfault.o
+       224        100          0          8        544       2918   main.o
+       104          0          0          0          0       1451   mutex.o
+       500         34          4         32         64      36399   os.o
+       148         40          0          0          0        304   os_asm.o
+        64          4          0          4          0     567125   retarget.o
+       216         24          0         40          0        798   serial.o
+       444         22         24          8         32       2472   simpleroundrobin.o
+        30          0          0          0          0        831   sleep.o
+        64         26        392          0       1536        892   startup_stm32f407xx.o
+       532         44         16          4          0       2111   system_stm32f4xx.o
 
     ----------------------------------------------------------------------
-      2440        300        468         96       2176     616706   Object Totals
+      2440        300        468         96       2176     616942   Object Totals
          0          0         32          0          0          0   (incl. Generated)
          4          0          0          0          0          0   (incl. Padding)
 
@@ -830,8 +830,8 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      3184        326        468         96       2272     616146   Grand Totals
-      3184        326        468         96       2272     616146   ELF Image Totals
+      3184        326        468         96       2272     616382   Grand Totals
+      3184        326        468         96       2272     616382   ELF Image Totals
       3184        326        468         96          0          0   ROM Totals
 
 ==============================================================================

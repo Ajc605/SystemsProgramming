@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Flash\DocetOS_sleep_wait.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Flash\DocetOS_sleep_wait.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Mon Jul 27 10:23:48 2020
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Mon Jul 27 11:00:27 2020
 <BR><P>
 <H3>Maximum Stack Usage =        136 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -137,11 +137,11 @@ Function Pointers
  <LI><a href="#[67]">_svc_OS_wait</a> from os.o(.text) referenced from os_asm.o(OS_func)
  <LI><a href="#[65]">_svc_OS_yield</a> from os.o(.text) referenced from os_asm.o(OS_func)
  <LI><a href="#[60]">fputc</a> from retarget.o(.text) referenced from _printf_char_file.o(.text)
+ <LI><a href="#[6d]">roundRobin_wait</a> from simpleroundrobin.o(.text) referenced from simpleroundrobin.o(.constdata)
  <LI><a href="#[6b]">simpleRoundRobin_addTask</a> from simpleroundrobin.o(.text) referenced from simpleroundrobin.o(.constdata)
  <LI><a href="#[6e]">simpleRoundRobin_notify</a> from simpleroundrobin.o(.text) referenced from simpleroundrobin.o(.constdata)
  <LI><a href="#[6a]">simpleRoundRobin_scheduler</a> from simpleroundrobin.o(.text) referenced from simpleroundrobin.o(.constdata)
  <LI><a href="#[6c]">simpleRoundRobin_taskExit</a> from simpleroundrobin.o(.text) referenced from simpleroundrobin.o(.constdata)
- <LI><a href="#[6d]">simpleRoundRobin_wait</a> from simpleroundrobin.o(.text) referenced from simpleroundrobin.o(.constdata)
  <LI><a href="#[87]">task1</a> from main.o(.text) referenced from main.o(.text)
  <LI><a href="#[8c]">task2</a> from main.o(.text) referenced from main.o(.text)
 </UL>
@@ -358,7 +358,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[91]"></a>OS_currentTCB</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, os.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;simpleRoundRobin_wait
+<BR><BR>[Called By]<UL><LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;roundRobin_wait
 <LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;simpleRoundRobin_scheduler
 <LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_sleep
 <LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_mutex_release
@@ -437,7 +437,7 @@ Global Symbols
 <BR>[Address Reference Count : 1]<UL><LI> os_asm.o(OS_func)
 </UL>
 <P><STRONG><a name="[93]"></a>getCheckSum</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, os.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;simpleRoundRobin_wait
+<BR><BR>[Called By]<UL><LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;roundRobin_wait
 <LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_mutex_acquire
 </UL>
 
@@ -918,8 +918,8 @@ Local Symbols
 <P><STRONG><a name="[6c]"></a>simpleRoundRobin_taskExit</STRONG> (Thumb, 32 bytes, Stack size 0 bytes, simpleroundrobin.o(.text))
 <BR>[Address Reference Count : 1]<UL><LI> simpleroundrobin.o(.constdata)
 </UL>
-<P><STRONG><a name="[6d]"></a>simpleRoundRobin_wait</STRONG> (Thumb, 50 bytes, Stack size 24 bytes, simpleroundrobin.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = simpleRoundRobin_wait
+<P><STRONG><a name="[6d]"></a>roundRobin_wait</STRONG> (Thumb, 50 bytes, Stack size 24 bytes, simpleroundrobin.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = roundRobin_wait
 </UL>
 <BR>[Calls]<UL><LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getCheckSum
 <LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_currentTCB
