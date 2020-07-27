@@ -3,6 +3,7 @@
 #include "stm32f4xx.h"
 #include <stdlib.h>
 #include <string.h>
+extern void scheduler_init(void);
 
 __align(8)
 
@@ -61,6 +62,7 @@ void OS_init(OS_Scheduler_t const * scheduler) {
 	ASSERT(_scheduler->taskexit_callback);
 	ASSERT(_scheduler->wait_callback);
 	ASSERT(_scheduler->notify_callback);
+	scheduler_init();
 }
 
 /* Starts the OS and never returns. */
@@ -71,9 +73,10 @@ void OS_start() {
 }
 
 /* Initialises a task control block (TCB) and its associated stack.  See os.h for details. */
-void OS_initialiseTCB(OS_TCB_t * TCB, uint32_t * const stack, void (* const func)(void const * const), void const * const data) {
+void OS_initialiseTCB(OS_TCB_t * TCB, uint32_t * const stack, void (* const func)(void const * const), void const * const data, uint32_t priority) {
 	TCB->sp = stack - (sizeof(OS_StackFrame_t) / sizeof(uint32_t));
-	TCB->priority = TCB->state = TCB->data = 0;
+	TCB->priority = priority;
+	TCB->state = TCB->data = 0;
 	OS_StackFrame_t *sf = (OS_StackFrame_t *)(TCB->sp);
 	memset(sf, 0, sizeof(OS_StackFrame_t));
 	/* By placing the address of the task function in pc, and the address of _OS_task_end() in lr, the task
@@ -126,14 +129,15 @@ void _svc_OS_task_exit(void) {
 	SCB->ICSR = SCB_ICSR_PENDSVSET_Msk;
 }
 /* SVC handler that calls OS_wait when the mutex is already in use. */
-void _svc_OS_wait(void * reason, uint32_t checkSum) {
-		_scheduler->wait_callback((OS_TCB_t *)reason,(uint32_t )((uint32_t *)reason + 1));
+void _svc_OS_wait(uint32_t checkSum) {
+	uint32_t *t = (uint32_t *)checkSum;
+		_scheduler->wait_callback((uint32_t )*t);
 }
 
 /* SVC handler that calls OS_notify when the current task in the mutex is relased. */
-void _svc_OS_notify(void * reason) {
+void _svc_OS_notify(void) {
 	checkValue++;
-	_scheduler->notify_callback((OS_TCB_t *)reason);
+	_scheduler->notify_callback();
 }
 
 /* Returns the checksum value */

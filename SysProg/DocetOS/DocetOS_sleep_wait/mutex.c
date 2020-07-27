@@ -1,6 +1,6 @@
 #include "mutex.h"
 #include "os.h"
-#include "simpleRoundRobin.h"
+#include "priority.h"
 
 //__align(8)
 
@@ -30,7 +30,7 @@ void OS_mutex_acquire(OS_mutex_t * mutex) {
 			}
 		} else {
 			if(mutex_TCB != (unsigned)cur_TCB) {
-				OS_wait(mutex, getCheckSum());
+				OS_wait(getCheckSum());
 			} 
 		}
 	}
@@ -42,7 +42,7 @@ void OS_mutex_release(OS_mutex_t * mutex) {
 		mutex->counter--;
 		if(mutex->counter == 0) {
 			mutex->prt_TCB = 0;
-			OS_notify(mutex);
+			OS_notify();
 		}
 	}
 }

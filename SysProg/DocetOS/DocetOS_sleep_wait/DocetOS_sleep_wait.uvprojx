@@ -403,11 +403,6 @@
               <FileType>1</FileType>
               <FilePath>.\main.c</FilePath>
             </File>
-            <File>
-              <FileName>simpleRoundRobin.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\simpleRoundRobin.c</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -457,6 +452,26 @@
               <FileName>mutex.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\mutex.c</FilePath>
+            </File>
+            <File>
+              <FileName>priority.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\priority.c</FilePath>
+            </File>
+            <File>
+              <FileName>priority.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\priority.h</FilePath>
+            </File>
+            <File>
+              <FileName>heap.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\heap.h</FilePath>
+            </File>
+            <File>
+              <FileName>heap.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\heap.c</FilePath>
             </File>
           </Files>
         </Group>

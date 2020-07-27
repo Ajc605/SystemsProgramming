@@ -24,8 +24,8 @@ typedef struct {
 	OS_TCB_t const * (* scheduler_callback)(void);
 	void (* addtask_callback)(OS_TCB_t * const newTask);
 	void (* taskexit_callback)(OS_TCB_t * const task);
-	void (* wait_callback) (void * const reason, uint32_t checkSum);
-	void (* notify_callback) (void * const reason);
+	void (* wait_callback) (uint32_t checkSum);
+	void (* notify_callback) (void);
 } OS_Scheduler_t;
 
 /***************************/
@@ -60,7 +60,7 @@ uint32_t OS_elapsedTicks(void);
      to this function.
    The third argument is a pointer to the function that the task should execute.
    The fourth argument is a void pointer to data that the task should receive. */
-void OS_initialiseTCB(OS_TCB_t * TCB, uint32_t * const stack, void (* const func)(void const * const), void const * const data);
+void OS_initialiseTCB(OS_TCB_t * TCB, uint32_t * const stack, void (* const func)(void const * const), void const * const data, uint32_t priority);
 
 /* SVC delegate to add a task */
 void __svc(OS_SVC_ADD_TASK) OS_addTask(OS_TCB_t const * const);
@@ -73,10 +73,10 @@ void __svc(OS_SVC_ADD_TASK) OS_addTask(OS_TCB_t const * const);
 void __svc(OS_SVC_YIELD) OS_yield(void);
 
 /* SVC delegate to wait the current task */
-void __svc(OS_SVC_WAIT) OS_wait(void * reason, uint32_t checkSum);
+void __svc(OS_SVC_WAIT) OS_wait(uint32_t checkSum);
 
 /* SVC delegate to notify waiting task */
-void __svc(OS_SVC_NOTIFY) OS_notify(void * reason);
+void __svc(OS_SVC_NOTIFY) OS_notify();
 
 /****************/
 /* Declarations */
