@@ -10,6 +10,7 @@ void init_mutex (OS_mutex_t * mutex) {
 }
 
 void OS_mutex_acquire(OS_mutex_t * mutex) {
+	uint32_t checkCode = getCheckSum();
 	/* getting the currentlu runing TCB */
 	OS_TCB_t * cur_TCB = OS_currentTCB();
 	
@@ -29,8 +30,8 @@ void OS_mutex_acquire(OS_mutex_t * mutex) {
 				break;
 			}
 		} else {
-			if(mutex_TCB != (unsigned)cur_TCB) {
-				OS_wait(getCheckSum());
+			if(mutex_TCB != (uint32_t)cur_TCB) {
+				OS_wait(checkCode);
 			} 
 		}
 	}

@@ -129,9 +129,8 @@ void _svc_OS_task_exit(void) {
 	SCB->ICSR = SCB_ICSR_PENDSVSET_Msk;
 }
 /* SVC handler that calls OS_wait when the mutex is already in use. */
-void _svc_OS_wait(uint32_t checkSum) {
-	uint32_t *t = (uint32_t *)checkSum;
-		_scheduler->wait_callback((uint32_t )*t);
+void _svc_OS_wait(_OS_SVC_StackFrame_t const * const stack) {
+		_scheduler->wait_callback((uint32_t )stack->r0);
 }
 
 /* SVC handler that calls OS_notify when the current task in the mutex is relased. */

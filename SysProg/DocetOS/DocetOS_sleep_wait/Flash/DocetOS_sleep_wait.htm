@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Flash\DocetOS_sleep_wait.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Flash\DocetOS_sleep_wait.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Mon Jul 27 10:04:50 2020
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Tue Jul 28 12:47:26 2020
 <BR><P>
 <H3>Maximum Stack Usage =        152 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -343,7 +343,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> main.o(.text)
 </UL>
-<P><STRONG><a name="[7b]"></a>main</STRONG> (Thumb, 76 bytes, Stack size 8 bytes, main.o(.text))
+<P><STRONG><a name="[7b]"></a>main</STRONG> (Thumb, 72 bytes, Stack size 8 bytes, main.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 136 + Unknown Stack Size
 <LI>Call Chain = main &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
@@ -430,8 +430,8 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> os_asm.o(OS_func)
 </UL>
-<P><STRONG><a name="[67]"></a>_svc_OS_wait</STRONG> (Thumb, 18 bytes, Stack size 16 bytes, os.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = _svc_OS_wait
+<P><STRONG><a name="[67]"></a>_svc_OS_wait</STRONG> (Thumb, 16 bytes, Stack size 8 bytes, os.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = _svc_OS_wait
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> os_asm.o(OS_func)
 </UL>
@@ -465,7 +465,7 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[88]"></a>OS_mutex_acquire</STRONG> (Thumb, 58 bytes, Stack size 24 bytes, mutex.o(.text))
+<P><STRONG><a name="[88]"></a>OS_mutex_acquire</STRONG> (Thumb, 60 bytes, Stack size 24 bytes, mutex.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = OS_mutex_acquire
 </UL>
 <BR>[Calls]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getCheckSum

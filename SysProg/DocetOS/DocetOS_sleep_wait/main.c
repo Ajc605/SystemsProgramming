@@ -47,7 +47,7 @@ int main(void) {
 
 	/* Initialise and start the OS */
 	OS_init(&priorityScheduler);
-	OS_addTask(&TCB1);
+	//OS_addTask(&TCB1);
 	OS_addTask(&TCB2);
 	OS_start();
 }

@@ -5,6 +5,9 @@ int queue[10];
 int insert = 0;
 int retrieve = 0;
 
+/*
+
+*/
 int put(int item) {
 	int status = 0; 
 	

@@ -76,7 +76,7 @@ void __svc(OS_SVC_YIELD) OS_yield(void);
 void __svc(OS_SVC_WAIT) OS_wait(uint32_t checkSum);
 
 /* SVC delegate to notify waiting task */
-void __svc(OS_SVC_NOTIFY) OS_notify();
+void __svc(OS_SVC_NOTIFY) OS_notify(void);
 
 /****************/
 /* Declarations */
