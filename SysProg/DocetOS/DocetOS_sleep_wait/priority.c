@@ -98,7 +98,15 @@ static void priority_wait(uint32_t checkSum) {
 	/* Check if an ISR has happend been calling this function and completeing it. */
 	if(checkSum == getCheckSum()) {
 		OS_TCB_t *cur_TCB = OS_currentTCB();
-		cur_TCB->state |= TASK_STATE_WAIT;
+		
+		uint32_t task_state =  __LDREXW(&(cur_TCB->state));
+		if(!(task_state & TASK_STATE_WAIT)) {
+			uint32_t store = 1;
+			while(store != 0) {
+				store = __STREXW((uint32_t)(task_state |= TASK_STATE_WAIT), &(cur_TCB->state));
+			}
+		}
+		
 		while(1) {
 			if(waitingTaskFIFOPut(cur_TCB)){
 				break;
