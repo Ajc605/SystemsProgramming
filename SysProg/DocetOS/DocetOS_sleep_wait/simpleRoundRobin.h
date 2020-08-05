@@ -8,4 +8,6 @@
 
 extern OS_Scheduler_t const simpleRoundRobinScheduler;
 
+void sleepHeapInsert(OS_TCB_t * tcb);
+
 #endif /* __simpleRoundRobin_h__ */

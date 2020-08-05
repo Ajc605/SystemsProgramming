@@ -38,8 +38,13 @@ typedef struct {
 	/* The remaining fields are provided for expandability.  None of them have a dedicated
 	   purpose, but their names might imply a use.  Feel free to use these fields for anything
 	   you like. */
-	uint32_t volatile priority;
 	uint32_t volatile data;
+	/* This field is used to asign a priority to the task */
+	uint32_t volatile priority;
+	/* This field is used to asign the priority field as this is due to change */
+	uint32_t volatile fixed_priority;
+	/* This field is used to created a linked list for waiting tasks */
+	void * prt_TCB;
 } OS_TCB_t;
 
 /* Constants that define bits in a thread's 'state' field. */

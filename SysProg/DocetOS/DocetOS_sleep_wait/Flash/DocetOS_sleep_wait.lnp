@@ -8,6 +8,7 @@
 ".\flash\sleep.o"
 ".\flash\hardfault.o"
 ".\flash\mutex.o"
+".\flash\heap.o"
 ".\flash\startup_stm32f407xx.o"
 ".\flash\system_stm32f4xx.o"
 --strict --scatter ".\Flash\DocetOS_sleep_wait.sct"

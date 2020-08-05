@@ -4,7 +4,8 @@
 #include "stdint.h"
 
 typedef struct {
-		OS_TCB_t * prt_TCB;
+		OS_TCB_t * prt_running_TCB;
+		OS_TCB_t * prt_waiting_TCB;
 		uint32_t counter;
 } OS_mutex_t;
 
