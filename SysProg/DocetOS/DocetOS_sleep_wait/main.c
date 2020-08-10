@@ -4,24 +4,31 @@
 #include "priority.h"
 #include "sleep.h"
 #include "mutex.h"
+#include "semaphore.h"
 
 static OS_mutex_t mutex;
+static OS_semaphore_t semaphore;
 
 
 void task3(void) {
-	OS_mutex_acquire(&mutex);
+	//OS_mutex_acquire(&mutex);
+	OS_semaphore_acquire(&semaphore);
 	printf("Message from Task 3\r\n");
-	OS_mutex_release(&mutex);
+	//OS_mutex_release(&mutex);
+	OS_semaphore_release(&semaphore);
 }
 
 void task1(void const *const args) {
 	while(1) {
-		OS_mutex_acquire(&mutex);
+		//OS_mutex_acquire(&mutex);
+		OS_semaphore_acquire(&semaphore);
 		printf("Message from Task 1\r\n");
-		//task3();
-		OS_mutex_release(&mutex);
+		task3();
+		//OS_mutex_release(&mutex);
+		OS_semaphore_release(&semaphore);
+		
 		//printf("Ticks %d\r\n",OS_elapsedTicks());
-		OS_sleep(11);
+		//OS_sleep(11);
 		//printf("Ticks %d\r\n",OS_elapsedTicks());
 	}
 }
@@ -67,6 +74,7 @@ int main(void) {
 	serial_init();
 	
 	init_mutex(&mutex);
+	init_semaphore(&semaphore);
 
 	printf("\r\nDocetOS Sleep and Mutex\r\n");
 
@@ -87,10 +95,10 @@ int main(void) {
 	/* Initialise and start the OS */
 	OS_init(&priorityScheduler);
 	OS_addTask(&TCB1);
-	OS_addTask(&TCB2);
+	/*OS_addTask(&TCB2);
 	OS_addTask(&TCB4);
 	OS_addTask(&TCB5);
 	OS_addTask(&TCB6);
-	OS_addTask(&TCB7);
+	OS_addTask(&TCB7);*/
 	OS_start();
 }
