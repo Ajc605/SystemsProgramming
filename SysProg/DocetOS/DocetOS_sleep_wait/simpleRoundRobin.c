@@ -24,8 +24,6 @@ static void simpleRoundRobin_taskExit(OS_TCB_t * const tcb);
 static void roundRobin_wait(OS_mutex_t * mutex, uint32_t checkSum);
 static void simpleRoundRobin_notify(OS_TCB_t * const tcb);
 
-static OS_TCB_t * sleepHeapExtract(void);
-
 /* Heap */
 static heap_t runningHeap;
 static heap_t sleepHeap;
@@ -63,10 +61,6 @@ static OS_TCB_t const * simpleRoundRobin_scheduler(void) {
 			if(sleepHeap.TCB[0]->priority < tick){
 				/* Extract sleeping task, as enough time as pasted */
 				OS_TCB_t * woken_tcb = heap_extract(&sleepHeap);
-				/* Swop the priority and data fields, as heap is arranged in priority order */
-				uint32_t priority = tcb->priority;
-				woken_tcb->priority = tcb->data;
-				woken_tcb->data = priority;
 				/* Clare the sleep bit */
 				woken_tcb->state &= ~TASK_STATE_SLEEP;
 				/* Clear the data field */
@@ -87,9 +81,7 @@ static OS_TCB_t const * simpleRoundRobin_scheduler(void) {
 				/* Extract the task as in a sleep state*/
 				OS_TCB_t * sleep_TCB = heap_extract(&runningHeap);
 				/* Swop the priority and data fields, as heap is arranged in priority order */
-				uint32_t priority = tcb->priority;
 				tcb->priority = tcb->data;
-				tcb->data = priority;
 				/* Store in the sleeping Heap*/
 				heap_insert(&sleepHeap, tcb);
 			}
@@ -166,26 +158,4 @@ static void simpleRoundRobin_notify(OS_TCB_t * const tcb){
 	}
 }
 
-/* Heaps  designed for TCB are store with the highest priority at the top of the heap, therefore
-	 for the sleeping heap the TCB's data and priority fields are temperarly swapped. This will then
-	 store the tcb that needs to wake up at the top of the heap. These fields are then set back to 
-	 once the extracted from the heap*/
- void sleepHeapInsert(OS_TCB_t * tcb) {
-	if(tcb == runningHeap.TCB[0]) {
-		heap_extract(&runningHeap);
-	}
-	uint32_t priority = tcb->priority;
-	tcb->priority = tcb->data;
-	tcb->data = priority;
-	heap_insert(&sleepHeap, tcb);
-}
 
-/* Heaps  designed for TCB with the highest priority to be stored at the top of the heap, therefore
-	 for the sleep heap the TCB's data and priority fields are temperarly swapped.*/
-static OS_TCB_t * sleepHeapExtract(void) {
-	OS_TCB_t * tcb = heap_extract(&sleepHeap);
-	uint32_t priority = tcb->priority;
-	tcb->priority = tcb->data;
-	tcb->data = priority;
-	return tcb;
-}
