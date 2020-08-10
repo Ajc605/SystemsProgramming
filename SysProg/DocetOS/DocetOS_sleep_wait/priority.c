@@ -1,4 +1,4 @@
-#include "simpleRoundRobin.h"
+#include "priority.h"
 #include "heap.h"
 #include "mutex.h"
 #include "os.h"
@@ -18,36 +18,36 @@
 	 a lot of time looking through the array each time it is called. */
 
 /* Prototypes (functions are static, so these aren't in the header file) */
-static OS_TCB_t const * simpleRoundRobin_scheduler(void);
-static void simpleRoundRobin_addTask(OS_TCB_t * const tcb);
-static void simpleRoundRobin_taskExit(OS_TCB_t * const tcb);
-static void roundRobin_wait(OS_mutex_t * mutex, uint32_t checkSum);
-static void simpleRoundRobin_notify(OS_TCB_t * const tcb);
+static OS_TCB_t const * priority_scheduler(void);
+static void priority_addTask(OS_TCB_t * const tcb);
+static void priority_taskExit(OS_TCB_t * const tcb);
+static void priority_wait(OS_mutex_t * mutex, uint32_t checkSum);
+static void priority_notify(OS_TCB_t * const tcb);
 
 /* Heap */
 static heap_t runningHeap;
 static heap_t sleepHeap;
-static OS_TCB_t * runningStore[SIMPLE_RR_MAX_TASKS];
-static OS_TCB_t * sleepStore[SIMPLE_RR_MAX_TASKS];
+static OS_TCB_t * runningStore[PRIORITY_MAX_TASKS];
+static OS_TCB_t * sleepStore[PRIORITY_MAX_TASKS];
 
 /* Scheduler block for the simple round-robin */
-OS_Scheduler_t const simpleRoundRobinScheduler = {
+OS_Scheduler_t const priorityScheduler = {
 	.preemptive = 1,
-	.scheduler_callback = simpleRoundRobin_scheduler,
-	.addtask_callback = simpleRoundRobin_addTask,
-	.taskexit_callback = simpleRoundRobin_taskExit,
-	.wait_callback = roundRobin_wait,
-	.notify_callback = simpleRoundRobin_notify
+	.scheduler_callback = priority_scheduler,
+	.addtask_callback = priority_addTask,
+	.taskexit_callback = priority_taskExit,
+	.wait_callback = priority_wait,
+	.notify_callback = priority_notify
 };
 
 /* scheduler*/
-void scheduler_init(void ) {
+void OS_scheduler_init(void ) {
 	heap_init(&runningHeap, runningStore);
 	heap_init(&sleepHeap, sleepStore);
 }
 
 /* Round-robin scheduler callback */
-static OS_TCB_t const * simpleRoundRobin_scheduler(void) {
+static OS_TCB_t const * priority_scheduler(void) {
 	// Clear the yield flag if it's set - we simply don't care
 	OS_currentTCB()->state &= ~TASK_STATE_YIELD;
 	OS_TCB_t * tcb = OS_currentTCB();
@@ -93,8 +93,8 @@ static OS_TCB_t const * simpleRoundRobin_scheduler(void) {
 }
 
 /* 'Add task' callback */
-static void simpleRoundRobin_addTask(OS_TCB_t * const tcb) {
-	if(SIMPLE_RR_MAX_TASKS > runningHeap.length) {
+static void priority_addTask(OS_TCB_t * const tcb) {
+	if(PRIORITY_MAX_TASKS > runningHeap.length) {
 		heap_insert(&runningHeap, tcb);
 		return;
 	}
@@ -102,21 +102,21 @@ static void simpleRoundRobin_addTask(OS_TCB_t * const tcb) {
 }
 
 /* 'Task exit' callback */
-static void simpleRoundRobin_taskExit(OS_TCB_t * const tcb) {
+static void priority_taskExit(OS_TCB_t * const tcb) {
 	// Remove the given TCB from the list of tasks so it won't be run again
 	heap_extract(&runningHeap);
 }
 
 /* 'wait' callback 
 		Set the TCB to a waiting state and set the reason to the address of the mutex it is waiting for.*/
-static void roundRobin_wait(OS_mutex_t * const mutex, uint32_t const checkSum) {
+static void priority_wait(OS_mutex_t * const mutex, uint32_t const checkSum) {
 	/* Check if an ISR has happend been calling this function and completeing it. */
 	if(checkSum == getCheckSum()) {
 		
 		OS_TCB_t *cur_TCB = OS_currentTCB();
 		cur_TCB->state |= TASK_STATE_WAIT;
 		
-		uint32_t address = 0;
+		//uint32_t address = 0;
 		OS_TCB_t * tcb = 0;
 		/* Check mutex waitng pointer */
 		if(!(mutex->prt_waiting_TCB)) {
@@ -150,7 +150,7 @@ static void roundRobin_wait(OS_mutex_t * const mutex, uint32_t const checkSum) {
 
 /* 'notify' callback 		
 		Check all elemenets in the RR array if they are waiting to the mutex that as just been relases*/
-static void simpleRoundRobin_notify(OS_TCB_t * const tcb){
+static void priority_notify(OS_TCB_t * const tcb){
 	__CLREX();
 	if(tcb != 0) {
 		OS_TCB_t * prt_tcb = tcb->prt_TCB;

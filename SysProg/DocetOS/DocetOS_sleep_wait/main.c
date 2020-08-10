@@ -1,7 +1,7 @@
 #include "os.h"
 #include <stdio.h>
 #include "utils/serial.h"
-#include "simpleRoundRobin.h"
+#include "priority.h"
 #include "sleep.h"
 #include "mutex.h"
 
@@ -85,7 +85,7 @@ int main(void) {
 	OS_initialiseTCB(&TCB7, stack7+64, task7, 0, 2);
 
 	/* Initialise and start the OS */
-	OS_init(&simpleRoundRobinScheduler);
+	OS_init(&priorityScheduler);
 	OS_addTask(&TCB1);
 	OS_addTask(&TCB2);
 	OS_addTask(&TCB4);

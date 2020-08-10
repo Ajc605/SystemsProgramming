@@ -404,9 +404,14 @@
               <FilePath>.\main.c</FilePath>
             </File>
             <File>
-              <FileName>simpleRoundRobin.c</FileName>
+              <FileName>priority.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\simpleRoundRobin.c</FilePath>
+              <FilePath>.\priority.c</FilePath>
+            </File>
+            <File>
+              <FileName>priority.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\priority.h</FilePath>
             </File>
           </Files>
         </Group>

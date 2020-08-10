@@ -1,6 +1,6 @@
 #include "mutex.h"
 #include "os.h"
-#include "simpleRoundRobin.h"
+#include "priority.h"
 
 //__align(8)
 

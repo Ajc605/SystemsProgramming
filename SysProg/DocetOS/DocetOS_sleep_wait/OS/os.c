@@ -3,7 +3,7 @@
 #include "stm32f4xx.h"
 #include <stdlib.h>
 #include <string.h>
-extern void scheduler_init(void);
+extern void OS_scheduler_init(void);
 
 __align(8)
 
@@ -62,7 +62,7 @@ void OS_init(OS_Scheduler_t const * scheduler) {
 	ASSERT(_scheduler->taskexit_callback);
 	ASSERT(_scheduler->wait_callback);
 	ASSERT(_scheduler->notify_callback);
-	 scheduler_init();
+	OS_scheduler_init();
 }
 
 /* Starts the OS and never returns. */

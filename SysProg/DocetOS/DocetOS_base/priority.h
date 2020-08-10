@@ -8,5 +8,4 @@
 
 extern OS_Scheduler_t const simpleRoundRobinScheduler;
 
-
 #endif /* __simpleRoundRobin_h__ */
