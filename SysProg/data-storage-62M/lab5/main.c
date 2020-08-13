@@ -13,16 +13,7 @@ typedef struct {
 
 int main(void) {
 	serial_init();
-	
-	int x = 2;
-	void *y = &x;
-	void **z = &y;
-	
-	int a = (int)z;
-	
-	
-	
-	
+	printf("\r\n");
 	/* Declare and intialise a memory pool */
 	static pool_t pool;
 	static packet_t poolElements[10];

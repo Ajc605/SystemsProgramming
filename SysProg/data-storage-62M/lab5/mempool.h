@@ -4,7 +4,7 @@
 #include <stddef.h>
 
 typedef struct {
-	void *head;
+	void * head;
 } pool_t;
 
 void pool_init(pool_t *pool);
