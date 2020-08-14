@@ -21,7 +21,7 @@
 static OS_TCB_t const * priority_scheduler(void);
 static void priority_addTask(OS_TCB_t * const tcb);
 static void priority_taskExit(OS_TCB_t * const tcb);
-static void priority_wait(OS_mutex_t * mutex, uint32_t checkSum);
+static void priority_wait(OS_TCB_t * headTCB, uint32_t checkSum);
 static void priority_notify(OS_TCB_t * const tcb);
 
 /* Heap */
@@ -108,44 +108,20 @@ static void priority_taskExit(OS_TCB_t * const tcb) {
 }
 
 /* 'wait' callback 
-		Set the TCB to a waiting state and set the reason to the address of the mutex it is waiting for.*/
-static void priority_wait(OS_mutex_t * const mutex, uint32_t const checkSum) {
+This function takes a pointer to a OS_TCB_t struct and a uint32_t checkSum.
+The check sum is used to see if an ISR has been called, if so this task my not need to wait and should
+check again. This function will add the current waiting task to a linked list. The head of this list is
+the passed TCB to this function. This function will function will loop through the list until it reaches 
+the end*/
+static void priority_wait(OS_TCB_t * headTCB, uint32_t const checkSum) {
 	/* Check if an ISR has happend been calling this function and completeing it. */
 	if(checkSum == getCheckSum()) {
 		
 		OS_TCB_t *cur_TCB = OS_currentTCB();
 		cur_TCB->state |= TASK_STATE_WAIT;
 		
-		//uint32_t address = 0;
-		OS_TCB_t * tcb = 0;
-		/* Check mutex waitng pointer */
-		if(!(mutex->prt_waiting_TCB)) {
-			/* Not set, so set it as head of list */
-			//tcb = (mutex->prt_waiting_TCB);
-			mutex->prt_waiting_TCB = cur_TCB;
-		} else {
-			tcb = mutex->prt_waiting_TCB;
-			/* loop to end of list */
-			while(!(tcb->prt_TCB)) {
-				tcb = tcb->prt_TCB;
-			}
-			mutex->prt_waiting_TCB = tcb;
-			/* Add to end of the list */
-			
-		}
-		
-		/*
-		uint32_t store = 1;		
-		while(store != 0) {
-			uint32_t task_state =  __LDREXW(&tcb);
-			if(!(task_state & TASK_STATE_WAIT)) {		
-				store = __STREXW((uint32_t)(cur_TCB), &tcb);
-			}
-		}*/
-		
-		
-		SCB->ICSR = SCB_ICSR_PENDSVSET_Msk;
 	}
+		SCB->ICSR = SCB_ICSR_PENDSVSET_Msk;
 }
 
 /* 'notify' callback 		

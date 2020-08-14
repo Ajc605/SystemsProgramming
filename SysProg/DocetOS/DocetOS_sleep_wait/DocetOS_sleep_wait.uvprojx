@@ -483,6 +483,16 @@
               <FileType>5</FileType>
               <FilePath>.\semaphore.h</FilePath>
             </File>
+            <File>
+              <FileName>mempool.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\mempool.h</FilePath>
+            </File>
+            <File>
+              <FileName>mempool.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\mempool.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

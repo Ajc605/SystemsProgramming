@@ -130,7 +130,7 @@ void _svc_OS_task_exit(void) {
 }
 /* SVC handler that calls OS_wait when the mutex is already in use. */
 void _svc_OS_wait(_OS_SVC_StackFrame_t const * const stack) {
-		_scheduler->wait_callback((void *)stack->r0,(uint32_t )stack->r1);
+		_scheduler->wait_callback((OS_TCB_t *)stack->r0,(uint32_t )stack->r1);
 }
 
 /* SVC handler that calls OS_notify when the current task in the mutex is relased. */
