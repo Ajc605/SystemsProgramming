@@ -121,7 +121,8 @@ This function takes a pointer to a OS_TCB_t struct and a uint32_t checkSum.
 The check sum is used to see if an ISR has been called, if so this task my not need to wait and should
 check again. This function will add the current waiting task to a linked list. The head of this list is
 the passed TCB to this function. This function will function will loop through the list until it reaches 
-the end*/
+the end
+*/
 static void priority_wait(uint32_t const checkSum) {
 	/* Check if an ISR has happend been calling this function and completeing it. */
 	if(checkSum == getCheckSum()) {
@@ -134,7 +135,8 @@ static void priority_wait(uint32_t const checkSum) {
 }
 
 /* 'notify' callback 		
-Check all elemenets in the RR array if they are waiting to the mutex that as just been relases*/
+Check all elemenets in the RR array if they are waiting to the mutex that as just been relases 
+*/
 static void priority_notify(OS_TCB_t * const tcb){
 	__CLREX();
 	if(tcb != 0) {

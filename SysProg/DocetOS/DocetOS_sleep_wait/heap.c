@@ -2,6 +2,11 @@
 #include "os.h"
 #include <stdio.h>
 
+/* heap_up, takes a pointer to a heap_t structure and returns nothing.
+This starts with the top element in the heap, if it is the root element
+then it stops. If not then compare its pirority value it's parent, if the 
+parent is smaller ten stop. else swap the two elements and do the same checks.
+*/
 static void heap_up(heap_t *heap) {
 	/* check heap isn't empty */
 	if(heap->length -1 != 0) {
@@ -11,7 +16,6 @@ static void heap_up(heap_t *heap) {
 				/* Compare with parent */
 				if(heap->TCB[(possition/2)-1]->priority > heap->TCB[possition-1]->priority ) {
 					/* Parent is bigger, swap */
-					//printf("Parent: %d, is bigger vlaue: %d\r\n", heap->store[(possition/2)-1], heap->store[(possition)-1]);
 					OS_TCB_t *  value = heap->TCB[possition-1];
 					heap->TCB[possition-1] = heap->TCB[(possition/2)-1];
 					heap->TCB[(possition/2)-1] = value;
@@ -19,7 +23,6 @@ static void heap_up(heap_t *heap) {
 					possition = possition/2;
 				} else {
 					/* Parent is smaller */
-					//printf("Parent: %d, is smaller vlaue: %d\r\n", heap->store[(possition/2)-1], heap->store[(possition)-1]);
 					break;
 				}
 			} else {
@@ -27,11 +30,14 @@ static void heap_up(heap_t *heap) {
 				break;
 			}
 		}
-	} else {
-		//printf("Empty\r\n");
-	}
+	} 
 }
 
+/* heap_down, takes a pointer to a heap_t strcutre and returns nothing.
+Starting with the top element, if it has childern then compare their 
+priority value. If the parent is smaller stop, else swap the parent with 
+the smaller child. Repeat untill reach a stop.
+*/
 static void heap_down(heap_t *heap) {
 	int parent_index = 1;
 	while(1) {
@@ -78,23 +84,32 @@ static void heap_down(heap_t *heap) {
 	}
 }
 
+/* heap_init, takes a pointer to heap_t structure and a double pointer to a OS_TCB_t
+structure and returns nothing. The heap is initailised byt setting the length to zero
+and TCB field to the passed double pointer to tcb.
+*/
 void heap_init(heap_t *heap, OS_TCB_t **tcb) {
 	heap->TCB = tcb;
 	heap->length = 0;
 }
 
+/* heap_insert, this function takes a pointer to heap_t structure and pointer to OS_TCB_t 
+structure and returns nothing. The task is added to the end of the list and the length is 
+field of the heap is increased, then heap up is called.
+*/
 void heap_insert(heap_t *heap, OS_TCB_t *tcb) {
 	heap->TCB[(heap->length)++] = tcb;
 	heap_up(heap);
 }
 
-OS_TCB_t *  heap_extract(heap_t *heap) {
-	OS_TCB_t *  value = heap->TCB[0];
+/* heap_extract, takes a pointer to a heap_t structure and retursn a pointer to OS_TCB_t
+First it stores a local value of the top element, then replaces the the top element with 
+the last one, deacreas the length filed of the heap and calles heap up. the local value 
+is returned.
+*/
+OS_TCB_t * heap_extract(heap_t *heap) {
+	OS_TCB_t * topElement = heap->TCB[0];
 	heap->TCB[0] = heap->TCB[--(heap->length)];
 	heap_down(heap);
-	return value;
-}
-
-int heap_isEmpty(heap_t *heap) {
-	return !(heap->length);
+	return topElement;
 }

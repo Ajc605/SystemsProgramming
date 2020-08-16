@@ -29,9 +29,9 @@ void OS_semaphore_acquire(OS_semaphore_t * semaphore) {
 		if(counter_value != 0) {
 			/* Descrease and store */
 			uint32_t store = __STREXW(--counter_value, &(semaphore->counter));
-			/* Check if store was sucessful*/
+			/* Check if store was sucessful */
 			if(store == 0) {
-				/* Successful*/
+				/* Successful */
 				break;
 			}
 		} else {
@@ -41,24 +41,24 @@ void OS_semaphore_acquire(OS_semaphore_t * semaphore) {
 			while(1) {
 				/* Load TCB */
 			  OS_TCB_t * TCB = (OS_TCB_t *) __LDREXW(&(semaphore->prt_waiting_TCB));
-				/* Check TCB is a set*/
+				/* Check TCB is a set */
 				if(!TCB) {
 					/* The pointer point is not set in either mutex or semaphore */
 					uint32_t store = __STREXW((uint32_t)OS_currentTCB(), &(semaphore->prt_waiting_TCB));
-					/* Check if store was sucessful*/
+					/* Check if store was sucessful */
 					if(store == 0) {
-						/* Successful*/
+						/* Successful */
 						break;
 					}
 				} else if(TCB == OS_currentTCB()) {
 					__CLREX();
 					break;
 				}else if(!TCB->prt_TCB) {
-					/* Reached end of list, add current TCB to end of list*/
+					/* Reached end of list, add current TCB to end of list */
 					uint32_t store = __STREXW((uint32_t)OS_currentTCB(), &(TCB->prt_TCB));
-					/* (2b) Check if store was sucessful*/
+					/* (2b) Check if store was sucessful */
 					if(store == 0) {
-						/* Successful*/
+						/* Successful */
 						break;
 					}
 				} else {

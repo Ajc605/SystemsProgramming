@@ -21,7 +21,7 @@ void * pool_allocate(OS_pool_t * const pool) {
 	OS_mutex_acquire(pool->mutex);
 	/* Next avaibe block to be returned */
 	void *prt = pool->head;
-	/* change the head to point to the next avaible block */
+	/* Change the head to point to the next avaible block */
 	void ** head = prt;
 	pool->head = *head;
 	OS_mutex_release(pool->mutex);
@@ -37,11 +37,11 @@ of the head.
 */
 void pool_deallocate(OS_pool_t * const pool, void * const item) {
 	OS_mutex_acquire(pool->mutex);
-	/* item is an address to a block of memory*/
+	/* item is an address to a block of memory */
 	void ** prt_item = item;
 	/* Instering a pointer to the current head */
 	*prt_item = pool->head;
-	/* Updating the head to point to new block*/
+	/* Updating the head to point to new block */
 	pool->head = item;
 	
 	OS_mutex_release(pool->mutex);
