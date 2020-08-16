@@ -52,6 +52,7 @@ void OS_semaphore_acquire(OS_semaphore_t * semaphore) {
 						break;
 					}
 				} else if(TCB == OS_currentTCB()) {
+					__CLREX();
 					break;
 				}else if(!TCB->prt_TCB) {
 					/* Reached end of list, add current TCB to end of list*/

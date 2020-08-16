@@ -43,11 +43,11 @@ void task1(void const *const args) {
 
 void task2(void const *const args) {
 	while(1) {
-		//OS_mutex_acquire(&runningMutex);
-		OS_semaphore_acquire(&semaphore);
+		OS_mutex_acquire(&runningMutex);
+		//OS_semaphore_acquire(&semaphore);
 		printf("Message from Task 2\r\n");
-		//OS_mutex_release(&runningMutex);
-		OS_semaphore_release(&semaphore);
+		OS_mutex_release(&runningMutex);
+		//OS_semaphore_release(&semaphore);
 		OS_sleep(1);
 	}
 }

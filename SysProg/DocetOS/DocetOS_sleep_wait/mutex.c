@@ -53,6 +53,7 @@ void OS_mutex_acquire(OS_mutex_t * mutex) {
 							break;
 						}
 					} else if(TCB == OS_currentTCB()) {
+						__CLREX();
 						break;
 					}else if(!TCB->prt_TCB) {
 						/* Reached end of list, add current TCB to end of list*/
@@ -82,6 +83,9 @@ If the new counter value is now zero, then set the mutex's 'prt_running_TCB' to 
 void OS_mutex_release(OS_mutex_t * mutex) {
 	if(mutex->prt_running_TCB == OS_currentTCB()) {
 		mutex->counter--;
-		OS_notify(mutex->prt_waiting_TCB);
+		if(mutex->counter == 0) {
+			mutex->prt_running_TCB = 0;
+			OS_notify(mutex->prt_waiting_TCB);
+		}
 	}
 }

@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Flash\DocetOS_sleep_wait.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Flash\DocetOS_sleep_wait.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Sun Aug 16 20:37:45 2020
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Sun Aug 16 20:52:50 2020
 <BR><P>
 <H3>Maximum Stack Usage =        144 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -144,7 +144,7 @@ Function Pointers
  <LI><a href="#[6d]">priority_wait</a> from priority.o(.text) referenced from priority.o(.constdata)
  <LI><a href="#[91]">task1</a> from main.o(.text) referenced from main.o(.text)
  <LI><a href="#[93]">task2</a> from main.o(.text) referenced from main.o(.text)
- <LI><a href="#[94]">task4</a> from main.o(.text) referenced from main.o(.text)
+ <LI><a href="#[96]">task4</a> from main.o(.text) referenced from main.o(.text)
  <LI><a href="#[9a]">task5</a> from main.o(.text) referenced from main.o(.text)
  <LI><a href="#[9b]">task6</a> from main.o(.text) referenced from main.o(.text)
  <LI><a href="#[9c]">task7</a> from main.o(.text) referenced from main.o(.text)
@@ -383,21 +383,21 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 <LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_sleep
-<LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_semaphore_release
-<LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_semaphore_acquire
+<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_mutex_release
+<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_mutex_acquire
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> main.o(.text)
 </UL>
-<P><STRONG><a name="[94]"></a>task4</STRONG> (Thumb, 100 bytes, Stack size 16 bytes, main.o(.text))
+<P><STRONG><a name="[96]"></a>task4</STRONG> (Thumb, 100 bytes, Stack size 16 bytes, main.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 144 + Unknown Stack Size
 <LI>Call Chain = task4 &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strncpy
+<BR>[Calls]<UL><LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strncpy
 <LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
-<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pool_deallocate
-<LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pool_allocate
-<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_mutex_release
-<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_mutex_acquire
+<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pool_deallocate
+<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pool_allocate
+<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_mutex_release
+<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_mutex_acquire
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> main.o(.text)
 </UL>
@@ -405,11 +405,11 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 144 + Unknown Stack Size
 <LI>Call Chain = task5 &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strncpy
+<BR>[Calls]<UL><LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strncpy
 <LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
-<LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pool_allocate
-<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_mutex_release
-<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_mutex_acquire
+<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pool_allocate
+<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_mutex_release
+<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_mutex_acquire
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> main.o(.text)
 </UL>
@@ -418,8 +418,8 @@ Global Symbols
 <LI>Call Chain = task6 &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
-<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_mutex_release
-<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_mutex_acquire
+<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_mutex_release
+<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_mutex_acquire
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> main.o(.text)
 </UL>
@@ -428,8 +428,8 @@ Global Symbols
 <LI>Call Chain = task7 &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
-<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_mutex_release
-<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_mutex_acquire
+<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_mutex_release
+<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_mutex_acquire
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> main.o(.text)
 </UL>
@@ -439,7 +439,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 <LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pool_init
-<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pool_deallocate
+<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pool_deallocate
 <LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_semaphore
 <LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_mutex
 <LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_start
@@ -463,8 +463,8 @@ Global Symbols
 <LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;priority_scheduler
 <LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_sleep
 <LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_semaphore_acquire
-<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_mutex_release
-<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_mutex_acquire
+<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_mutex_release
+<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_mutex_acquire
 </UL>
 
 <P><STRONG><a name="[a6]"></a>OS_elapsedTicks</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, os.o(.text))
@@ -545,7 +545,7 @@ Global Symbols
 <P><STRONG><a name="[a9]"></a>getCheckSum</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, os.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;priority_wait
 <LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_semaphore_acquire
-<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_mutex_acquire
+<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_mutex_acquire
 </UL>
 
 <P><STRONG><a name="[92]"></a>OS_sleep</STRONG> (Thumb, 30 bytes, Stack size 16 bytes, sleep.o(.text))
@@ -569,31 +569,33 @@ Global Symbols
 <LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[95]"></a>OS_mutex_acquire</STRONG> (Thumb, 144 bytes, Stack size 24 bytes, mutex.o(.text))
+<P><STRONG><a name="[94]"></a>OS_mutex_acquire</STRONG> (Thumb, 148 bytes, Stack size 24 bytes, mutex.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = OS_mutex_acquire
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getCheckSum
 <LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_currentTCB
 </UL>
-<BR>[Called By]<UL><LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pool_deallocate
-<LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pool_allocate
+<BR>[Called By]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pool_deallocate
+<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pool_allocate
 <LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task7
 <LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task6
 <LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task5
-<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task4
+<LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task4
+<LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task2
 </UL>
 
-<P><STRONG><a name="[99]"></a>OS_mutex_release</STRONG> (Thumb, 26 bytes, Stack size 8 bytes, mutex.o(.text))
+<P><STRONG><a name="[95]"></a>OS_mutex_release</STRONG> (Thumb, 34 bytes, Stack size 8 bytes, mutex.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = OS_mutex_release
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_currentTCB
 </UL>
-<BR>[Called By]<UL><LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pool_deallocate
-<LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pool_allocate
+<BR>[Called By]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pool_deallocate
+<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pool_allocate
 <LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task7
 <LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task6
 <LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task5
-<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task4
+<LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task4
+<LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task2
 </UL>
 
 <P><STRONG><a name="[a4]"></a>heap_init</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, heap.o(.text))
@@ -624,22 +626,20 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[8e]"></a>OS_semaphore_acquire</STRONG> (Thumb, 132 bytes, Stack size 24 bytes, semaphore.o(.text))
+<P><STRONG><a name="[8e]"></a>OS_semaphore_acquire</STRONG> (Thumb, 136 bytes, Stack size 24 bytes, semaphore.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = OS_semaphore_acquire
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;getCheckSum
 <LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_currentTCB
 </UL>
-<BR>[Called By]<UL><LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task2
-<LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task1
+<BR>[Called By]<UL><LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task1
 <LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task3
 </UL>
 
 <P><STRONG><a name="[90]"></a>OS_semaphore_release</STRONG> (Thumb, 34 bytes, Stack size 8 bytes, semaphore.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = OS_semaphore_release
 </UL>
-<BR>[Called By]<UL><LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task2
-<LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task1
+<BR>[Called By]<UL><LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task1
 <LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task3
 </UL>
 
@@ -651,24 +651,24 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[96]"></a>pool_allocate</STRONG> (Thumb, 28 bytes, Stack size 16 bytes, mempool.o(.text))
+<P><STRONG><a name="[97]"></a>pool_allocate</STRONG> (Thumb, 28 bytes, Stack size 16 bytes, mempool.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = pool_allocate &rArr; OS_mutex_acquire
 </UL>
-<BR>[Calls]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_mutex_release
-<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_mutex_acquire
+<BR>[Calls]<UL><LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_mutex_release
+<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_mutex_acquire
 </UL>
 <BR>[Called By]<UL><LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task5
-<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task4
+<LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task4
 </UL>
 
-<P><STRONG><a name="[98]"></a>pool_deallocate</STRONG> (Thumb, 28 bytes, Stack size 16 bytes, mempool.o(.text))
+<P><STRONG><a name="[99]"></a>pool_deallocate</STRONG> (Thumb, 28 bytes, Stack size 16 bytes, mempool.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = pool_deallocate &rArr; OS_mutex_acquire
 </UL>
-<BR>[Calls]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_mutex_release
-<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_mutex_acquire
+<BR>[Calls]<UL><LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_mutex_release
+<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_mutex_acquire
 </UL>
 <BR>[Called By]<UL><LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task4
+<LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task4
 </UL>
 
 <P><STRONG><a name="[3]"></a>Reset_Handler</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, startup_stm32f407xx.o(.text))
@@ -996,7 +996,7 @@ Global Symbols
 <LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task7
 <LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task6
 <LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task5
-<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task4
+<LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task4
 <LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task2
 <LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task1
 <LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task3
@@ -1049,13 +1049,13 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_memclr
 </UL>
 
-<P><STRONG><a name="[97]"></a>strncpy</STRONG> (Thumb, 86 bytes, Stack size 8 bytes, strncpy.o(.text))
+<P><STRONG><a name="[98]"></a>strncpy</STRONG> (Thumb, 86 bytes, Stack size 8 bytes, strncpy.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = strncpy
 </UL>
 <BR>[Calls]<UL><LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr
 </UL>
 <BR>[Called By]<UL><LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task5
-<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task4
+<LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task4
 </UL>
 
 <P><STRONG><a name="[eb]"></a>__use_two_region_memory</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, heapauxi.o(.text), UNUSED)
@@ -1103,7 +1103,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[b6]"></a>__aeabi_memclr</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, rt_memclr.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strncpy
+<BR><BR>[Called By]<UL><LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strncpy
 </UL>
 
 <P><STRONG><a name="[bc]"></a>__rt_memclr</STRONG> (Thumb, 68 bytes, Stack size 0 bytes, rt_memclr.o(.text), UNUSED)
