@@ -39,7 +39,7 @@ void OS_mutex_acquire(OS_mutex_t * mutex) {
 			}
 		} else {
 			if(mutex_TCB != OS_currentTCB()) {
-				OS_wait(mutex_TCB, checkCode);
+				OS_wait(checkCode);
 				while(1) {
 					/* Load TCB */
 					OS_TCB_t * TCB = (OS_TCB_t *) __LDREXW(&(mutex->prt_waiting_TCB));

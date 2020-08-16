@@ -37,8 +37,7 @@ void OS_semaphore_acquire(OS_semaphore_t * semaphore) {
 		} else {
 			/* Wait and try again */	
 			__CLREX();
-			OS_wait(OS_currentTCB(), checkCode);
-			
+			OS_wait(checkCode);
 			while(1) {
 				/* Load TCB */
 			  OS_TCB_t * TCB = (OS_TCB_t *) __LDREXW(&(semaphore->prt_waiting_TCB));
@@ -80,11 +79,11 @@ void OS_semaphore_release(OS_semaphore_t * semaphore) {
 	while(1) {
 		/* Lodaing the semaphore counter */
 		uint32_t counter_value =  __LDREXW(&(semaphore->counter));
-		/* Increase by one and store*/
+		/* Increase by one and store */
 		uint32_t store = __STREXW(++counter_value, &(semaphore->counter));
-		/* Check if store was sucessful*/
+		/* Check if store was sucessful */
 		if(store == 0) {
-			/* Successful*/
+			/* Successful */
 			break;
 		}
 	}

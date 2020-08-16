@@ -5,23 +5,19 @@
 #include <stdio.h>
 #include <stm32f4xx.h>
 
-/* This is an implementation of an extremely simple (and inefficient!) round-robin scheduler.
+/* This is an implementation of an pirority scheduler.
 
-   An array of pointers to TCBs is declared, and when tasks are added they are inserted into
-	 this array.  When tasks finish, they are removed from the array (pointers are set back to
-	 zero).  When the scheduler is invoked, it simply looks for the next available non-zero
-	 pointer in the array, and returns it.  If there are no non-zero TCB pointers in the array,
-	 a pointer to the idle task is returned instead.
-	 
-	 The inefficiency in this implementation arises mainly from the way arrays are used for list
-	 storage.  If the array is large and the number of tasks is small, the scheduler will spend
-	 a lot of time looking through the array each time it is called. */
+	When tasks are added they are put into a pirority heap, this will store them in priority
+	order with the highest priority at the top. When tasks are finished they are removed
+	from the heap and the next priority task is ran. If the heaps is empty, a pointer to the 
+	idle task is returned instead.
+*/
 
 /* Prototypes (functions are static, so these aren't in the header file) */
 static OS_TCB_t const * priority_scheduler(void);
 static void priority_addTask(OS_TCB_t * const tcb);
 static void priority_taskExit(OS_TCB_t * const tcb);
-static void priority_wait(OS_TCB_t * headTCB, uint32_t checkSum);
+static void priority_wait(uint32_t checkSum);
 static void priority_notify(OS_TCB_t * const tcb);
 
 /* Heap */
@@ -30,7 +26,7 @@ static heap_t sleepHeap;
 static OS_TCB_t * runningStore[PRIORITY_MAX_TASKS];
 static OS_TCB_t * sleepStore[PRIORITY_MAX_TASKS];
 
-/* Scheduler block for the simple round-robin */
+/* Scheduler block for the priority */
 OS_Scheduler_t const priorityScheduler = {
 	.preemptive = 1,
 	.scheduler_callback = priority_scheduler,
@@ -46,7 +42,7 @@ void OS_scheduler_init(void ) {
 	heap_init(&sleepHeap, sleepStore);
 }
 
-/* Round-robin scheduler callback */
+/* Priority scheduler callback */
 /* This is a priority scheduler that will run the TCB with the highest priority first.
 First it checks if any task exists is't in either running or sleep heap. Then it will check
 if there is anything in the sleep heap specifically. If so the top element is checked
@@ -61,7 +57,7 @@ added to the sleep heap. If the bit is not set, then the priority is set to '0'.
 fix the TCB to the top of the heap. It is then returned.
 */
 static OS_TCB_t const * priority_scheduler(void) {
-	// Clear the yield flag if it's set - we simply don't care
+	/* Clear the yield flag if it's set - we simply don't care */
 	OS_currentTCB()->state &= ~TASK_STATE_YIELD;
 	OS_TCB_t * tcb = OS_currentTCB();
 	
@@ -72,7 +68,7 @@ static OS_TCB_t const * priority_scheduler(void) {
 			/* Check is enough time has passed for the top of the heap */
 			uint32_t tick = OS_elapsedTicks();
 			if(sleepHeap.TCB[0]->priority < tick){
-				/* Extract sleeping task, as enough time as pasted */
+				/* Extract sleeping task, as enough time as passed */
 				OS_TCB_t * woken_tcb = heap_extract(&sleepHeap);
 				/* Clare the sleep bit */
 				woken_tcb->state &= ~TASK_STATE_SLEEP;
@@ -80,28 +76,28 @@ static OS_TCB_t const * priority_scheduler(void) {
 				woken_tcb->data = 0;
 				/* Place back into the running heap */
 				woken_tcb->priority = woken_tcb->fixed_priority;
-				heap_insert(&runningHeap, woken_tcb);
-				
+				heap_insert(&runningHeap, woken_tcb);	
 			} else {
 				break;
 			}
 		}
+		/* Check if there are any tasks in the running heap */
 		if(runningHeap.length){
 			if(!(runningHeap.TCB[0]->state & TASK_STATE_SLEEP)) {
 				runningHeap.TCB[0]->priority = 0;
 				return runningHeap.TCB[0];
 			} else {
-				/* Extract the task as in a sleep state*/
+				/* Extract the task as in a sleep state */
 				OS_TCB_t * sleep_TCB = heap_extract(&runningHeap);
 				/* Swop the priority and data fields, as heap is arranged in priority order */
 				tcb->priority = tcb->data;
-				/* Store in the sleeping Heap*/
+				/* Store in the sleeping heap */
 				heap_insert(&sleepHeap, tcb);
 			}
 		}
 	}
 	
-	// No tasks in the list, so return the idle task
+	/* No tasks in the list, so return the idle task */
 	return OS_idleTCB_p;
 }
 
@@ -126,7 +122,7 @@ The check sum is used to see if an ISR has been called, if so this task my not n
 check again. This function will add the current waiting task to a linked list. The head of this list is
 the passed TCB to this function. This function will function will loop through the list until it reaches 
 the end*/
-static void priority_wait(OS_TCB_t * headTCB, uint32_t const checkSum) {
+static void priority_wait(uint32_t const checkSum) {
 	/* Check if an ISR has happend been calling this function and completeing it. */
 	if(checkSum == getCheckSum()) {
 		
@@ -138,7 +134,7 @@ static void priority_wait(OS_TCB_t * headTCB, uint32_t const checkSum) {
 }
 
 /* 'notify' callback 		
-		Check all elemenets in the RR array if they are waiting to the mutex that as just been relases*/
+Check all elemenets in the RR array if they are waiting to the mutex that as just been relases*/
 static void priority_notify(OS_TCB_t * const tcb){
 	__CLREX();
 	if(tcb != 0) {

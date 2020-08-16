@@ -24,7 +24,7 @@ typedef struct {
 	OS_TCB_t const * (* scheduler_callback)(void);
 	void (* addtask_callback)(OS_TCB_t * const newTask);
 	void (* taskexit_callback)(OS_TCB_t * const task);
-	void (* wait_callback) (OS_TCB_t * headTCB, uint32_t const checkSum);
+	void (* wait_callback) (uint32_t const checkSum);
 	void (* notify_callback) (OS_TCB_t * const tcb);
 } OS_Scheduler_t;
 
@@ -73,7 +73,7 @@ void __svc(OS_SVC_ADD_TASK) OS_addTask(OS_TCB_t const * const);
 void __svc(OS_SVC_YIELD) OS_yield(void);
 
 /* SVC delegate to wait the current task */
-void __svc(OS_SVC_WAIT) OS_wait(OS_TCB_t * const headTCB, uint32_t const checkSum);
+void __svc(OS_SVC_WAIT) OS_wait(uint32_t const checkSum);
 
 /* SVC delegate to notify waiting task */
 void __svc(OS_SVC_NOTIFY) OS_notify(OS_TCB_t * const tcb);
