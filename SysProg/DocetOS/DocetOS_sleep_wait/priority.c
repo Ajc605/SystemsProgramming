@@ -40,13 +40,26 @@ OS_Scheduler_t const priorityScheduler = {
 	.notify_callback = priority_notify
 };
 
-/* scheduler*/
+/* scheduler */
 void OS_scheduler_init(void ) {
 	heap_init(&runningHeap, runningStore);
 	heap_init(&sleepHeap, sleepStore);
 }
 
 /* Round-robin scheduler callback */
+/* This is a priority scheduler that will run the TCB with the highest priority first.
+First it checks if any task exists is't in either running or sleep heap. Then it will check
+if there is anything in the sleep heap specifically. If so the top element is checked
+if enough time has passed, if so then the task is taken out of the heap, the data is 
+set to zero and priority is set back. This is done as the priority was overwritten when 
+the TCB was added to the sleep heap. The sleep bit is also cleared and the TCB is added 
+back to the running heap. Then the checks are complete for the new top element. Once this
+is complete a check is done on the running heap to see if any TCB exists there. If so 
+then the sleep bit of the top element is checked. If that is set then the TCB's priority
+is set to the data, this will store the sleep elements in time to wake order. This is then 
+added to the sleep heap. If the bit is not set, then the priority is set to '0'. This will 
+fix the TCB to the top of the heap. It is then returned.
+*/
 static OS_TCB_t const * priority_scheduler(void) {
 	// Clear the yield flag if it's set - we simply don't care
 	OS_currentTCB()->state &= ~TASK_STATE_YIELD;

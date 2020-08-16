@@ -3,17 +3,19 @@
 #include <stdio.h>
 
 
-/* This function is used to initalise a memory pool. It takes a constent pointer  to pool_t struct
-and a constent pointer OS_mutex_t structure. This function will set the */
+/* pool_init, this function is used to initialise a memory pool. It takes a constant pointer  to pool_t struct
+and a constant pointer OS_mutex_t structure. This function will set the head to zero, mutex pointer to point 
+to mutex passed to the function. It will also initiate the mutex.
+*/
 void pool_init(OS_pool_t * const pool, OS_mutex_t * const mutex) {
 	pool->head = 0;
 	pool->mutex = mutex;
+	init_mutex(pool->mutex);
 }
 
-/* This function takes a constant pointer to pool_t struct and returns a pointer to the next avaible.
-The next avaible block is stored within the pools head, as this is block will now be in use the 
-head needs to be updated to point to the next avaible block. This is stored at the within the returned 
-block.
+/* pool_allocate, this function takes a constant pointer to pool_t struct and returns a pointer to the next 
+available  block. This can be found in the pool's head field and the head is updated to point to the next
+available  block, which is stored within the current block the head is pointing to.
 */
 void * pool_allocate(OS_pool_t * const pool) {
 	OS_mutex_acquire(pool->mutex);
@@ -27,9 +29,11 @@ void * pool_allocate(OS_pool_t * const pool) {
 	
 }
 
-/* This function takes two arguments: constant pointer to a pool_t structure and constant pointer to a block of memory.
-This fuction will add the avaible block of memeory to the pool. Either because the pool is being initialsed 
-or the block was allocted and from the pool and is no longer needed.
+/* pool_deallocate, this function takes two arguments constant pointer to a pool_t structure and constant 
+pointer to a block of memory. This function will add the available block of memory to the pool. Either 
+because the pool is being initialised or the block was allocated and from the pool and is no longer needed.
+The head is updated to point to the new block, and the new bock will store a pointer to the previous  value
+of the head.
 */
 void pool_deallocate(OS_pool_t * const pool, void * const item) {
 	OS_mutex_acquire(pool->mutex);
